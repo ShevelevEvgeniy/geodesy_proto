@@ -7,8 +7,7 @@
 package base_station_v1
 
 import (
-	dto "gen/proto/dto"
-	dto1 "geodesy_proto/gen/proto/dto"
+	dto "github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -32,13 +31,13 @@ const file_proto_api_base_station_v1_base_station_proto_rawDesc = "" +
 	"\x11UpdateBaseStation\x12\x14.dto.BaseStationInfo\x1a\x18.dto.BaseStationResponse\x12E\n" +
 	"\x13ActivateBaseStation\x12\x14.dto.ActivateRequest\x1a\x18.dto.BaseStationResponse\x12I\n" +
 	"\x15DeactivateBaseStation\x12\x16.dto.DeactivateRequest\x1a\x18.dto.BaseStationResponse\x12;\n" +
-	"\x15ListAvailableStations\x12\f.dto.RoverID\x1a\x14.dto.BaseStationListB/Z-gen/proto/api/base_station_v1;base_station_v1b\x06proto3"
+	"\x15ListAvailableStations\x12\f.dto.RoverID\x1a\x14.dto.BaseStationListBXZVgithub.com/ShevelevEvgeniy/geodesy_proto/gen/proto/api/base_station_v1;base_station_v1b\x06proto3"
 
 var file_proto_api_base_station_v1_base_station_proto_goTypes = []any{
 	(*dto.BaseStationInfo)(nil),     // 0: dto.BaseStationInfo
 	(*dto.ActivateRequest)(nil),     // 1: dto.ActivateRequest
 	(*dto.DeactivateRequest)(nil),   // 2: dto.DeactivateRequest
-	(*dto1.RoverID)(nil),            // 3: dto.RoverID
+	(*dto.RoverID)(nil),             // 3: dto.RoverID
 	(*dto.BaseStationResponse)(nil), // 4: dto.BaseStationResponse
 	(*dto.BaseStationList)(nil),     // 5: dto.BaseStationList
 }

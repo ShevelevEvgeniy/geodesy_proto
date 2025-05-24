@@ -8,8 +8,7 @@ package base_station_v1
 
 import (
 	context "context"
-	dto "gen/proto/dto"
-	dto1 "geodesy_proto/gen/proto/dto"
+	dto "github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -36,7 +35,7 @@ type GNSSCorrectionServiceClient interface {
 	UpdateBaseStation(ctx context.Context, in *dto.BaseStationInfo, opts ...grpc.CallOption) (*dto.BaseStationResponse, error)
 	ActivateBaseStation(ctx context.Context, in *dto.ActivateRequest, opts ...grpc.CallOption) (*dto.BaseStationResponse, error)
 	DeactivateBaseStation(ctx context.Context, in *dto.DeactivateRequest, opts ...grpc.CallOption) (*dto.BaseStationResponse, error)
-	ListAvailableStations(ctx context.Context, in *dto1.RoverID, opts ...grpc.CallOption) (*dto.BaseStationList, error)
+	ListAvailableStations(ctx context.Context, in *dto.RoverID, opts ...grpc.CallOption) (*dto.BaseStationList, error)
 }
 
 type gNSSCorrectionServiceClient struct {
@@ -87,7 +86,7 @@ func (c *gNSSCorrectionServiceClient) DeactivateBaseStation(ctx context.Context,
 	return out, nil
 }
 
-func (c *gNSSCorrectionServiceClient) ListAvailableStations(ctx context.Context, in *dto1.RoverID, opts ...grpc.CallOption) (*dto.BaseStationList, error) {
+func (c *gNSSCorrectionServiceClient) ListAvailableStations(ctx context.Context, in *dto.RoverID, opts ...grpc.CallOption) (*dto.BaseStationList, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(dto.BaseStationList)
 	err := c.cc.Invoke(ctx, GNSSCorrectionService_ListAvailableStations_FullMethodName, in, out, cOpts...)
@@ -105,7 +104,7 @@ type GNSSCorrectionServiceServer interface {
 	UpdateBaseStation(context.Context, *dto.BaseStationInfo) (*dto.BaseStationResponse, error)
 	ActivateBaseStation(context.Context, *dto.ActivateRequest) (*dto.BaseStationResponse, error)
 	DeactivateBaseStation(context.Context, *dto.DeactivateRequest) (*dto.BaseStationResponse, error)
-	ListAvailableStations(context.Context, *dto1.RoverID) (*dto.BaseStationList, error)
+	ListAvailableStations(context.Context, *dto.RoverID) (*dto.BaseStationList, error)
 	mustEmbedUnimplementedGNSSCorrectionServiceServer()
 }
 
@@ -128,7 +127,7 @@ func (UnimplementedGNSSCorrectionServiceServer) ActivateBaseStation(context.Cont
 func (UnimplementedGNSSCorrectionServiceServer) DeactivateBaseStation(context.Context, *dto.DeactivateRequest) (*dto.BaseStationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeactivateBaseStation not implemented")
 }
-func (UnimplementedGNSSCorrectionServiceServer) ListAvailableStations(context.Context, *dto1.RoverID) (*dto.BaseStationList, error) {
+func (UnimplementedGNSSCorrectionServiceServer) ListAvailableStations(context.Context, *dto.RoverID) (*dto.BaseStationList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAvailableStations not implemented")
 }
 func (UnimplementedGNSSCorrectionServiceServer) mustEmbedUnimplementedGNSSCorrectionServiceServer() {}
@@ -225,7 +224,7 @@ func _GNSSCorrectionService_DeactivateBaseStation_Handler(srv interface{}, ctx c
 }
 
 func _GNSSCorrectionService_ListAvailableStations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(dto1.RoverID)
+	in := new(dto.RoverID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -237,7 +236,7 @@ func _GNSSCorrectionService_ListAvailableStations_Handler(srv interface{}, ctx c
 		FullMethod: GNSSCorrectionService_ListAvailableStations_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GNSSCorrectionServiceServer).ListAvailableStations(ctx, req.(*dto1.RoverID))
+		return srv.(GNSSCorrectionServiceServer).ListAvailableStations(ctx, req.(*dto.RoverID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
