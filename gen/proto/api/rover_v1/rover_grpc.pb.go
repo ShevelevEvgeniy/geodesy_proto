@@ -8,7 +8,7 @@ package rover_v1
 
 import (
 	context "context"
-	dto "github.com/ShevelevEvgeniy/geodesy_proto/proto/dto"
+	dto "geodesy_proto/gen/proto/dto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

@@ -455,7 +455,7 @@ const file_proto_dto_base_station_proto_rawDesc = "" +
 	"\x1fBASE_STATION_STATUS_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x01\x12\f\n" +
-	"\bINACTIVE\x10\x02B8Z6github.com/ShevelevEvgeniy/geodesy_proto/proto/dto;dtob\x06proto3"
+	"\bINACTIVE\x10\x02B\x13Z\x11gen/proto/dto;dtob\x06proto3"
 
 var (
 	file_proto_dto_base_station_proto_rawDescOnce sync.Once

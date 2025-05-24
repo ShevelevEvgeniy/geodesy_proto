@@ -401,7 +401,7 @@ const file_proto_dto_rover_proto_rawDesc = "" +
 	"\tgnss_data\x18\x06 \x01(\fR\bgnssData\"|\n" +
 	"\x12CorrectionResponse\x12'\n" +
 	"\x0fcorrection_data\x18\x01 \x01(\fR\x0ecorrectionData\x12=\n" +
-	"\fgenerated_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\vgeneratedAtB8Z6github.com/ShevelevEvgeniy/geodesy_proto/proto/dto;dtob\x06proto3"
+	"\fgenerated_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\vgeneratedAtB!Z\x1fgeodesy_proto/gen/proto/dto;dtob\x06proto3"
 
 var (
 	file_proto_dto_rover_proto_rawDescOnce sync.Once

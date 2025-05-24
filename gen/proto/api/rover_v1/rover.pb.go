@@ -7,7 +7,7 @@
 package rover_v1
 
 import (
-	dto "github.com/ShevelevEvgeniy/geodesy_proto/proto/dto"
+	dto "geodesy_proto/gen/proto/dto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -28,7 +28,7 @@ const file_proto_api_rover_v1_rover_proto_rawDesc = "" +
 	"\x1eproto/api/rover_v1/rover.proto\x12\brover_v1\x1a\x15proto/dto/rover.proto2\x9e\x01\n" +
 	"\x15GNSSCorrectionService\x12F\n" +
 	"\rRegisterRover\x12\x19.dto.RegisterRoverRequest\x1a\x1a.dto.RegisterRoverResponse\x12=\n" +
-	"\x0fDeregisterRover\x12\f.dto.RoverID\x1a\x1c.dto.DeregisterRoverResponseBFZDgithub.com/ShevelevEvgeniy/geodesy_proto/proto/api/rover_v1;rover_v1b\x06proto3"
+	"\x0fDeregisterRover\x12\f.dto.RoverID\x1a\x1c.dto.DeregisterRoverResponseB!Z\x1fgen/proto/api/rover_v1;rover_v1b\x06proto3"
 
 var file_proto_api_rover_v1_rover_proto_goTypes = []any{
 	(*dto.RegisterRoverRequest)(nil),    // 0: dto.RegisterRoverRequest

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dto;
 
-option go_package = "github.com/ShevelevEvgeniy/geodesy_proto/proto/dto;dto";
+option go_package = "geodesy_proto/gen/proto/dto;dto";
 
 import "google/protobuf/timestamp.proto";
 
