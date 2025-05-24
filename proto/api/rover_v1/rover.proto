@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package rover_v1;
+
+option go_package = "github.com/ShevelevEvgeniy/geodesy_proto/proto/api/rover_v1;rover_v1";
+
+import "proto/dto/rover.proto";
+
+service GNSSCorrectionService {
+  rpc RegisterRover(dto.RegisterRoverRequest) returns (dto.RegisterRoverResponse);
+  rpc DeregisterRover(dto.RoverID) returns (dto.DeregisterRoverResponse);
+}

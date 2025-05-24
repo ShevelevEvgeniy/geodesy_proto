@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package base_station_v1;
+
+option go_package = "github.com/ShevelevEvgeniy/geodesy_proto/proto/api/base_station_v1;base_station_v1";
+
+import "proto/dto/base_station.proto";
+import "proto/dto/rover.proto";
+
+service GNSSCorrectionService {
+  rpc AddBaseStation(dto.BaseStationInfo) returns (dto.BaseStationResponse);
+  rpc UpdateBaseStation(dto.BaseStationInfo) returns (dto.BaseStationResponse);
+  rpc ActivateBaseStation(dto.ActivateRequest) returns (dto.BaseStationResponse);
+  rpc DeactivateBaseStation(dto.DeactivateRequest) returns (dto.BaseStationResponse);
+  rpc ListAvailableStations(dto.RoverID) returns (dto.BaseStationList);
+}
