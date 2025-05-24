@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package dto;
+
+option go_package = "gen/proto/dto;dto";
+
+import "google/protobuf/timestamp.proto";
+
+enum BaseStationStatus {
+  BASE_STATION_STATUS_UNSPECIFIED = 0;
+  ACTIVE = 1;
+  INACTIVE = 2;
+}
+
+message BaseStationInfo {
+  int32 id = 1;
+  string name = 2;
+  double latitude = 3;
+  double longitude = 4;
+  double altitude = 5;
+  string antenna_type = 6;
+  double antenna_height = 7;
+  string receiver_type = 8;
+  string receiver_serial = 9;
+  string firmware_version = 10;
+  repeated string constellations = 11;
+  BaseStationStatus status = 12;
+  google.protobuf.Timestamp last_calibrated_at = 13;
+  google.protobuf.Timestamp installed_at = 14;
+  string comment = 15;
+}
+
+message BaseStationResponse {
+  bool success = 1;
+  string message = 2;
+  BaseStationInfo station = 3;
+}
+
+message ActivateRequest {
+  int32 base_station_id = 1;
+}
+
+message DeactivateRequest {
+  int32 base_station_id = 1;
+}
+
+message BaseStationList {
+  repeated BaseStationInfo stations = 1;
+}

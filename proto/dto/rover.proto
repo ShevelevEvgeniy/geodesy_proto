@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package dto;
+
+option go_package = "geodesy_proto/gen/proto/dto;dto";
+
+import "google/protobuf/timestamp.proto";
+
+message RegisterRoverRequest {
+  string id = 1;
+  string name = 2;
+  bool is_active = 3;
+  double max_distance_km = 4;
+}
+
+message RegisterRoverResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message RoverID {
+  string id = 1;
+}
+
+message DeregisterRoverResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message RoverRequest {
+  string rover_id = 1;
+  double latitude = 2;
+  double longitude = 3;
+  double altitude = 4;
+  google.protobuf.Timestamp timestamp = 5;
+  bytes gnss_data = 6;
+}
+
+message CorrectionResponse {
+  bytes correction_data = 1;
+  google.protobuf.Timestamp generated_at = 2;
+}
