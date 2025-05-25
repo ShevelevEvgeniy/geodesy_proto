@@ -2,41 +2,41 @@ syntax = "proto3";
 
 package dto;
 
-option go_package = "geodesy_proto/gen/proto/dto;dto";
+option go_package = "github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto;dto";
 
+import "vendor/protoc-gen-validate/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
 message RegisterRoverRequest {
-  string id = 1;
-  string name = 2;
+  string name = 2 [(validate.rules).string.min_len = 3];
   bool is_active = 3;
-  double max_distance_km = 4;
+  double max_distance_km = 4 [(validate.rules).double.gt = 0];
 }
 
 message RegisterRoverResponse {
   bool success = 1;
-  string message = 2;
+  string message = 2 [(validate.rules).string.min_len = 1];
 }
 
 message RoverID {
-  string id = 1;
+  string id = 1 [(validate.rules).string.uuid = true];
 }
 
 message DeregisterRoverResponse {
   bool success = 1;
-  string message = 2;
+  string message = 2 [(validate.rules).string.min_len = 1];
 }
 
 message RoverRequest {
-  string rover_id = 1;
-  double latitude = 2;
-  double longitude = 3;
+  string rover_id = 1 [(validate.rules).string.uuid = true];
+  double latitude = 2 [(validate.rules).double.gte = -90, (validate.rules).double.lte = 90];
+  double longitude = 3 [(validate.rules).double.gte = -180, (validate.rules).double.lte = 180];
   double altitude = 4;
   google.protobuf.Timestamp timestamp = 5;
-  bytes gnss_data = 6;
+  bytes gnss_data = 6 [(validate.rules).bytes.min_len = 1];
 }
 
 message CorrectionResponse {
-  bytes correction_data = 1;
+  bytes correction_data = 1 [(validate.rules).bytes.min_len = 1];
   google.protobuf.Timestamp generated_at = 2;
 }

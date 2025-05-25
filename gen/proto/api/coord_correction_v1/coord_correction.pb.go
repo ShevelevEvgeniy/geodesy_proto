@@ -7,7 +7,7 @@
 package coord_correction_v1
 
 import (
-	dto "geodesy_proto/gen/proto/dto"
+	dto "github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -27,7 +27,7 @@ const file_proto_api_coord_correction_v1_coord_correction_proto_rawDesc = "" +
 	"\n" +
 	"4proto/api/coord_correction_v1/coord_correction.proto\x12\x13coord_correction_v1\x1a\x15proto/dto/rover.proto2\\\n" +
 	"\x15GNSSCorrectionService\x12C\n" +
-	"\x11StreamCorrections\x12\x11.dto.RoverRequest\x1a\x17.dto.CorrectionResponse(\x010\x01B7Z5gen/proto/api/coord_correction_v1;coord_correction_v1b\x06proto3"
+	"\x11StreamCorrections\x12\x11.dto.RoverRequest\x1a\x17.dto.CorrectionResponse(\x010\x01B`Z^github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/api/coord_correction_v1;coord_correction_v1b\x06proto3"
 
 var file_proto_api_coord_correction_v1_coord_correction_proto_goTypes = []any{
 	(*dto.RoverRequest)(nil),       // 0: dto.RoverRequest

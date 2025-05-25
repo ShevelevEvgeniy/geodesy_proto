@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package coord_correction_v1;
 
-option go_package = "gen/proto/api/coord_correction_v1;coord_correction_v1";
+option go_package = "github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/api/coord_correction_v1;coord_correction_v1";
 
 import "proto/dto/rover.proto";
 

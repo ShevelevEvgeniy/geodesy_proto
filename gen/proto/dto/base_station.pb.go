@@ -7,6 +7,7 @@
 package dto
 
 import (
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -73,7 +74,7 @@ func (BaseStationStatus) EnumDescriptor() ([]byte, []int) {
 
 type BaseStationInfo struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	Id               int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name             string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Latitude         float64                `protobuf:"fixed64,3,opt,name=latitude,proto3" json:"latitude,omitempty"`
 	Longitude        float64                `protobuf:"fixed64,4,opt,name=longitude,proto3" json:"longitude,omitempty"`
@@ -122,11 +123,11 @@ func (*BaseStationInfo) Descriptor() ([]byte, []int) {
 	return file_proto_dto_base_station_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *BaseStationInfo) GetId() int32 {
+func (x *BaseStationInfo) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 func (x *BaseStationInfo) GetName() string {
@@ -423,39 +424,39 @@ var File_proto_dto_base_station_proto protoreflect.FileDescriptor
 
 const file_proto_dto_base_station_proto_rawDesc = "" +
 	"\n" +
-	"\x1cproto/dto/base_station.proto\x12\x03dto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc9\x04\n" +
-	"\x0fBaseStationInfo\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
-	"\blatitude\x18\x03 \x01(\x01R\blatitude\x12\x1c\n" +
-	"\tlongitude\x18\x04 \x01(\x01R\tlongitude\x12\x1a\n" +
-	"\baltitude\x18\x05 \x01(\x01R\baltitude\x12!\n" +
-	"\fantenna_type\x18\x06 \x01(\tR\vantennaType\x12%\n" +
-	"\x0eantenna_height\x18\a \x01(\x01R\rantennaHeight\x12#\n" +
-	"\rreceiver_type\x18\b \x01(\tR\freceiverType\x12'\n" +
-	"\x0freceiver_serial\x18\t \x01(\tR\x0ereceiverSerial\x12)\n" +
+	"\x1cproto/dto/base_station.proto\x12\x03dto\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd6\x05\n" +
+	"\x0fBaseStationInfo\x12\x18\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\x02id\x12\x1b\n" +
+	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\x123\n" +
+	"\blatitude\x18\x03 \x01(\x01B\x17\xfaB\x14\x12\x12\x19\x00\x00\x00\x00\x00\x80V@)\x00\x00\x00\x00\x00\x80V\xc0R\blatitude\x125\n" +
+	"\tlongitude\x18\x04 \x01(\x01B\x17\xfaB\x14\x12\x12\x19\x00\x00\x00\x00\x00\x80f@)\x00\x00\x00\x00\x00\x80f\xc0R\tlongitude\x12\x1a\n" +
+	"\baltitude\x18\x05 \x01(\x01R\baltitude\x12*\n" +
+	"\fantenna_type\x18\x06 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\vantennaType\x125\n" +
+	"\x0eantenna_height\x18\a \x01(\x01B\x0e\xfaB\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\rantennaHeight\x12,\n" +
+	"\rreceiver_type\x18\b \x01(\tB\a\xfaB\x04r\x02\x10\x01R\freceiverType\x120\n" +
+	"\x0freceiver_serial\x18\t \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x0ereceiverSerial\x122\n" +
 	"\x10firmware_version\x18\n" +
-	" \x01(\tR\x0ffirmwareVersion\x12&\n" +
-	"\x0econstellations\x18\v \x03(\tR\x0econstellations\x12.\n" +
-	"\x06status\x18\f \x01(\x0e2\x16.dto.BaseStationStatusR\x06status\x12H\n" +
+	" \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x0ffirmwareVersion\x120\n" +
+	"\x0econstellations\x18\v \x03(\tB\b\xfaB\x05\x92\x01\x02\b\x01R\x0econstellations\x128\n" +
+	"\x06status\x18\f \x01(\x0e2\x16.dto.BaseStationStatusB\b\xfaB\x05\x82\x01\x02\x10\x01R\x06status\x12H\n" +
 	"\x12last_calibrated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\x10lastCalibratedAt\x12=\n" +
 	"\finstalled_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\vinstalledAt\x12\x18\n" +
-	"\acomment\x18\x0f \x01(\tR\acomment\"y\n" +
+	"\acomment\x18\x0f \x01(\tR\acomment\"\x82\x01\n" +
 	"\x13BaseStationResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12.\n" +
-	"\astation\x18\x03 \x01(\v2\x14.dto.BaseStationInfoR\astation\"9\n" +
-	"\x0fActivateRequest\x12&\n" +
-	"\x0fbase_station_id\x18\x01 \x01(\x05R\rbaseStationId\";\n" +
-	"\x11DeactivateRequest\x12&\n" +
-	"\x0fbase_station_id\x18\x01 \x01(\x05R\rbaseStationId\"C\n" +
-	"\x0fBaseStationList\x120\n" +
-	"\bstations\x18\x01 \x03(\v2\x14.dto.BaseStationInfoR\bstations*R\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12!\n" +
+	"\amessage\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\amessage\x12.\n" +
+	"\astation\x18\x03 \x01(\v2\x14.dto.BaseStationInfoR\astation\"B\n" +
+	"\x0fActivateRequest\x12/\n" +
+	"\x0fbase_station_id\x18\x01 \x01(\x05B\a\xfaB\x04\x1a\x02 \x00R\rbaseStationId\"D\n" +
+	"\x11DeactivateRequest\x12/\n" +
+	"\x0fbase_station_id\x18\x01 \x01(\x05B\a\xfaB\x04\x1a\x02 \x00R\rbaseStationId\"M\n" +
+	"\x0fBaseStationList\x12:\n" +
+	"\bstations\x18\x01 \x03(\v2\x14.dto.BaseStationInfoB\b\xfaB\x05\x92\x01\x02\b\x01R\bstations*R\n" +
 	"\x11BaseStationStatus\x12#\n" +
 	"\x1fBASE_STATION_STATUS_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x01\x12\f\n" +
-	"\bINACTIVE\x10\x02B\x13Z\x11gen/proto/dto;dtob\x06proto3"
+	"\bINACTIVE\x10\x02B<Z:github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto;dtob\x06proto3"
 
 var (
 	file_proto_dto_base_station_proto_rawDescOnce sync.Once
