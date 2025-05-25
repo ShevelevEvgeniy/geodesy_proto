@@ -21,7 +21,8 @@ tasks:
           --go-grpc_opt=paths=source_relative \
           --validate_out=lang=go,paths=source_relative:gen \
           proto/dto/base_station.proto \
-          proto/dto/rover.proto
+          proto/dto/rover.proto \
+          proto/dto/enums.proto
 
   generate-proto-api:
     desc: api proto generate
@@ -52,6 +53,7 @@ tasks:
   generate-proto:
     desc: full protobuf generation
     cmds:
+      - task: clean-gen
       - task: clone-pgv
       - task: generate-proto-dto
       - task: generate-proto-api

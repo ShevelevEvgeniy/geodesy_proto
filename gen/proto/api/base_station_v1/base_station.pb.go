@@ -25,8 +25,8 @@ var File_proto_api_base_station_v1_base_station_proto protoreflect.FileDescripto
 
 const file_proto_api_base_station_v1_base_station_proto_rawDesc = "" +
 	"\n" +
-	",proto/api/base_station_v1/base_station.proto\x12\x0fbase_station_v1\x1a\x1cproto/dto/base_station.proto\x1a\x15proto/dto/rover.proto2\xed\x02\n" +
-	"\x15GNSSCorrectionService\x12@\n" +
+	",proto/api/base_station_v1/base_station.proto\x12\x0fbase_station_v1\x1a\x1cproto/dto/base_station.proto\x1a\x15proto/dto/rover.proto2\xea\x02\n" +
+	"\x12BaseStationService\x12@\n" +
 	"\x0eAddBaseStation\x12\x14.dto.BaseStationInfo\x1a\x18.dto.BaseStationResponse\x12C\n" +
 	"\x11UpdateBaseStation\x12\x14.dto.BaseStationInfo\x1a\x18.dto.BaseStationResponse\x12E\n" +
 	"\x13ActivateBaseStation\x12\x14.dto.ActivateRequest\x1a\x18.dto.BaseStationResponse\x12I\n" +
@@ -42,16 +42,16 @@ var file_proto_api_base_station_v1_base_station_proto_goTypes = []any{
 	(*dto.BaseStationList)(nil),     // 5: dto.BaseStationList
 }
 var file_proto_api_base_station_v1_base_station_proto_depIdxs = []int32{
-	0, // 0: base_station_v1.GNSSCorrectionService.AddBaseStation:input_type -> dto.BaseStationInfo
-	0, // 1: base_station_v1.GNSSCorrectionService.UpdateBaseStation:input_type -> dto.BaseStationInfo
-	1, // 2: base_station_v1.GNSSCorrectionService.ActivateBaseStation:input_type -> dto.ActivateRequest
-	2, // 3: base_station_v1.GNSSCorrectionService.DeactivateBaseStation:input_type -> dto.DeactivateRequest
-	3, // 4: base_station_v1.GNSSCorrectionService.ListAvailableStations:input_type -> dto.RoverID
-	4, // 5: base_station_v1.GNSSCorrectionService.AddBaseStation:output_type -> dto.BaseStationResponse
-	4, // 6: base_station_v1.GNSSCorrectionService.UpdateBaseStation:output_type -> dto.BaseStationResponse
-	4, // 7: base_station_v1.GNSSCorrectionService.ActivateBaseStation:output_type -> dto.BaseStationResponse
-	4, // 8: base_station_v1.GNSSCorrectionService.DeactivateBaseStation:output_type -> dto.BaseStationResponse
-	5, // 9: base_station_v1.GNSSCorrectionService.ListAvailableStations:output_type -> dto.BaseStationList
+	0, // 0: base_station_v1.BaseStationService.AddBaseStation:input_type -> dto.BaseStationInfo
+	0, // 1: base_station_v1.BaseStationService.UpdateBaseStation:input_type -> dto.BaseStationInfo
+	1, // 2: base_station_v1.BaseStationService.ActivateBaseStation:input_type -> dto.ActivateRequest
+	2, // 3: base_station_v1.BaseStationService.DeactivateBaseStation:input_type -> dto.DeactivateRequest
+	3, // 4: base_station_v1.BaseStationService.ListAvailableStations:input_type -> dto.RoverID
+	4, // 5: base_station_v1.BaseStationService.AddBaseStation:output_type -> dto.BaseStationResponse
+	4, // 6: base_station_v1.BaseStationService.UpdateBaseStation:output_type -> dto.BaseStationResponse
+	4, // 7: base_station_v1.BaseStationService.ActivateBaseStation:output_type -> dto.BaseStationResponse
+	4, // 8: base_station_v1.BaseStationService.DeactivateBaseStation:output_type -> dto.BaseStationResponse
+	5, // 9: base_station_v1.BaseStationService.ListAvailableStations:output_type -> dto.BaseStationList
 	5, // [5:10] is the sub-list for method output_type
 	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

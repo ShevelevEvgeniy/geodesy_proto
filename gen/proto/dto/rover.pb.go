@@ -24,12 +24,17 @@ const (
 )
 
 type RegisterRoverRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	IsActive      bool                   `protobuf:"varint,3,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	MaxDistanceKm float64                `protobuf:"fixed64,4,opt,name=max_distance_km,json=maxDistanceKm,proto3" json:"max_distance_km,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	OwnerId               string                 `protobuf:"bytes,1,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
+	Name                  string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	RoverType             RoverType              `protobuf:"varint,3,opt,name=rover_type,json=roverType,proto3,enum=dto.RoverType" json:"rover_type,omitempty"`
+	SubscriptionExpiresAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=subscription_expires_at,json=subscriptionExpiresAt,proto3" json:"subscription_expires_at,omitempty"`
+	SerialNumber          string                 `protobuf:"bytes,5,opt,name=serial_number,json=serialNumber,proto3" json:"serial_number,omitempty"`
+	IsActive              bool                   `protobuf:"varint,6,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	Constellations        []Constellation        `protobuf:"varint,11,rep,packed,name=constellations,proto3,enum=dto.Constellation" json:"constellations,omitempty"`
+	MaxDistanceKm         float64                `protobuf:"fixed64,7,opt,name=max_distance_km,json=maxDistanceKm,proto3" json:"max_distance_km,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *RegisterRoverRequest) Reset() {
@@ -62,9 +67,37 @@ func (*RegisterRoverRequest) Descriptor() ([]byte, []int) {
 	return file_proto_dto_rover_proto_rawDescGZIP(), []int{0}
 }
 
+func (x *RegisterRoverRequest) GetOwnerId() string {
+	if x != nil {
+		return x.OwnerId
+	}
+	return ""
+}
+
 func (x *RegisterRoverRequest) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *RegisterRoverRequest) GetRoverType() RoverType {
+	if x != nil {
+		return x.RoverType
+	}
+	return RoverType_ROVER_TYPE_UNSPECIFIED
+}
+
+func (x *RegisterRoverRequest) GetSubscriptionExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.SubscriptionExpiresAt
+	}
+	return nil
+}
+
+func (x *RegisterRoverRequest) GetSerialNumber() string {
+	if x != nil {
+		return x.SerialNumber
 	}
 	return ""
 }
@@ -74,6 +107,13 @@ func (x *RegisterRoverRequest) GetIsActive() bool {
 		return x.IsActive
 	}
 	return false
+}
+
+func (x *RegisterRoverRequest) GetConstellations() []Constellation {
+	if x != nil {
+		return x.Constellations
+	}
+	return nil
 }
 
 func (x *RegisterRoverRequest) GetMaxDistanceKm() float64 {
@@ -86,7 +126,9 @@ func (x *RegisterRoverRequest) GetMaxDistanceKm() float64 {
 type RegisterRoverResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	RoverId       string                 `protobuf:"bytes,2,opt,name=rover_id,json=roverId,proto3" json:"rover_id,omitempty"`
+	OwnerId       string                 `protobuf:"bytes,3,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
+	RegisteredAt  *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -128,11 +170,25 @@ func (x *RegisterRoverResponse) GetSuccess() bool {
 	return false
 }
 
-func (x *RegisterRoverResponse) GetMessage() string {
+func (x *RegisterRoverResponse) GetRoverId() string {
 	if x != nil {
-		return x.Message
+		return x.RoverId
 	}
 	return ""
+}
+
+func (x *RegisterRoverResponse) GetOwnerId() string {
+	if x != nil {
+		return x.OwnerId
+	}
+	return ""
+}
+
+func (x *RegisterRoverResponse) GetRegisteredAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegisteredAt
+	}
+	return nil
 }
 
 type RoverID struct {
@@ -182,7 +238,9 @@ func (x *RoverID) GetId() string {
 type DeregisterRoverResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	RoverId       string                 `protobuf:"bytes,2,opt,name=rover_id,json=roverId,proto3" json:"rover_id,omitempty"`
+	OwnerId       string                 `protobuf:"bytes,3,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
+	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -224,6 +282,20 @@ func (x *DeregisterRoverResponse) GetSuccess() bool {
 	return false
 }
 
+func (x *DeregisterRoverResponse) GetRoverId() string {
+	if x != nil {
+		return x.RoverId
+	}
+	return ""
+}
+
+func (x *DeregisterRoverResponse) GetOwnerId() string {
+	if x != nil {
+		return x.OwnerId
+	}
+	return ""
+}
+
 func (x *DeregisterRoverResponse) GetMessage() string {
 	if x != nil {
 		return x.Message
@@ -232,15 +304,17 @@ func (x *DeregisterRoverResponse) GetMessage() string {
 }
 
 type RoverRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RoverId       string                 `protobuf:"bytes,1,opt,name=rover_id,json=roverId,proto3" json:"rover_id,omitempty"`
-	Latitude      float64                `protobuf:"fixed64,2,opt,name=latitude,proto3" json:"latitude,omitempty"`
-	Longitude     float64                `protobuf:"fixed64,3,opt,name=longitude,proto3" json:"longitude,omitempty"`
-	Altitude      float64                `protobuf:"fixed64,4,opt,name=altitude,proto3" json:"altitude,omitempty"`
-	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	GnssData      []byte                 `protobuf:"bytes,6,opt,name=gnss_data,json=gnssData,proto3" json:"gnss_data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	RoverId             string                 `protobuf:"bytes,1,opt,name=rover_id,json=roverId,proto3" json:"rover_id,omitempty"`
+	Latitude            float64                `protobuf:"fixed64,2,opt,name=latitude,proto3" json:"latitude,omitempty"`
+	Longitude           float64                `protobuf:"fixed64,3,opt,name=longitude,proto3" json:"longitude,omitempty"`
+	Altitude            float64                `protobuf:"fixed64,4,opt,name=altitude,proto3" json:"altitude,omitempty"`
+	Timestamp           *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	GnssData            []byte                 `protobuf:"bytes,6,opt,name=gnss_data,json=gnssData,proto3" json:"gnss_data,omitempty"`
+	CoordinateSystem    CoordinateSystem       `protobuf:"varint,7,opt,name=coordinate_system,json=coordinateSystem,proto3,enum=dto.CoordinateSystem" json:"coordinate_system,omitempty"`
+	CoordinateSubsystem string                 `protobuf:"bytes,8,opt,name=coordinate_subsystem,json=coordinateSubsystem,proto3" json:"coordinate_subsystem,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *RoverRequest) Reset() {
@@ -315,12 +389,28 @@ func (x *RoverRequest) GetGnssData() []byte {
 	return nil
 }
 
+func (x *RoverRequest) GetCoordinateSystem() CoordinateSystem {
+	if x != nil {
+		return x.CoordinateSystem
+	}
+	return CoordinateSystem_COORD_SYS_UNSPECIFIED
+}
+
+func (x *RoverRequest) GetCoordinateSubsystem() string {
+	if x != nil {
+		return x.CoordinateSubsystem
+	}
+	return ""
+}
+
 type CorrectionResponse struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	CorrectionData []byte                 `protobuf:"bytes,1,opt,name=correction_data,json=correctionData,proto3" json:"correction_data,omitempty"`
-	GeneratedAt    *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=generated_at,json=generatedAt,proto3" json:"generated_at,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	BaseStationId      string                 `protobuf:"bytes,1,opt,name=base_station_id,json=baseStationId,proto3" json:"base_station_id,omitempty"`
+	CorrectionData     []byte                 `protobuf:"bytes,2,opt,name=correction_data,json=correctionData,proto3" json:"correction_data,omitempty"`
+	GeneratedAt        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=generated_at,json=generatedAt,proto3" json:"generated_at,omitempty"`
+	UsedConstellations []Constellation        `protobuf:"varint,4,rep,packed,name=used_constellations,json=usedConstellations,proto3,enum=dto.Constellation" json:"used_constellations,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *CorrectionResponse) Reset() {
@@ -353,6 +443,13 @@ func (*CorrectionResponse) Descriptor() ([]byte, []int) {
 	return file_proto_dto_rover_proto_rawDescGZIP(), []int{5}
 }
 
+func (x *CorrectionResponse) GetBaseStationId() string {
+	if x != nil {
+		return x.BaseStationId
+	}
+	return ""
+}
+
 func (x *CorrectionResponse) GetCorrectionData() []byte {
 	if x != nil {
 		return x.CorrectionData
@@ -367,33 +464,54 @@ func (x *CorrectionResponse) GetGeneratedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *CorrectionResponse) GetUsedConstellations() []Constellation {
+	if x != nil {
+		return x.UsedConstellations
+	}
+	return nil
+}
+
 var File_proto_dto_rover_proto protoreflect.FileDescriptor
 
 const file_proto_dto_rover_proto_rawDesc = "" +
 	"\n" +
-	"\x15proto/dto/rover.proto\x12\x03dto\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x88\x01\n" +
-	"\x14RegisterRoverRequest\x12\x1b\n" +
-	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x03R\x04name\x12\x1b\n" +
-	"\tis_active\x18\x03 \x01(\bR\bisActive\x126\n" +
-	"\x0fmax_distance_km\x18\x04 \x01(\x01B\x0e\xfaB\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\rmaxDistanceKm\"T\n" +
+	"\x15proto/dto/rover.proto\x12\x03dto\x1a2vendor/protoc-gen-validate/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x15proto/dto/enums.proto\"\xae\x03\n" +
+	"\x14RegisterRoverRequest\x12#\n" +
+	"\bowner_id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\aownerId\x12\x1b\n" +
+	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x03R\x04name\x127\n" +
+	"\n" +
+	"rover_type\x18\x03 \x01(\x0e2\x0e.dto.RoverTypeB\b\xfaB\x05\x82\x01\x02\x10\x01R\troverType\x12R\n" +
+	"\x17subscription_expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x15subscriptionExpiresAt\x12,\n" +
+	"\rserial_number\x18\x05 \x01(\tB\a\xfaB\x04r\x02\x10\x03R\fserialNumber\x12\x1b\n" +
+	"\tis_active\x18\x06 \x01(\bR\bisActive\x12D\n" +
+	"\x0econstellations\x18\v \x03(\x0e2\x12.dto.ConstellationB\b\xfaB\x05\x92\x01\x02\b\x01R\x0econstellations\x126\n" +
+	"\x0fmax_distance_km\x18\a \x01(\x01B\x0e\xfaB\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\rmaxDistanceKm\"\xbc\x01\n" +
 	"\x15RegisterRoverResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12!\n" +
-	"\amessage\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\amessage\"#\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12#\n" +
+	"\brover_id\x18\x02 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\aroverId\x12#\n" +
+	"\bowner_id\x18\x03 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\aownerId\x12?\n" +
+	"\rregistered_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\"#\n" +
 	"\aRoverID\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\x02id\"V\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\x02id\"\xa0\x01\n" +
 	"\x17DeregisterRoverResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12!\n" +
-	"\amessage\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\amessage\"\x9b\x02\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12#\n" +
+	"\brover_id\x18\x02 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\aroverId\x12#\n" +
+	"\bowner_id\x18\x03 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\aownerId\x12!\n" +
+	"\amessage\x18\x04 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\amessage\"\x9c\x03\n" +
 	"\fRoverRequest\x12#\n" +
 	"\brover_id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\aroverId\x123\n" +
 	"\blatitude\x18\x02 \x01(\x01B\x17\xfaB\x14\x12\x12\x19\x00\x00\x00\x00\x00\x80V@)\x00\x00\x00\x00\x00\x80V\xc0R\blatitude\x125\n" +
 	"\tlongitude\x18\x03 \x01(\x01B\x17\xfaB\x14\x12\x12\x19\x00\x00\x00\x00\x00\x80f@)\x00\x00\x00\x00\x00\x80f\xc0R\tlongitude\x12\x1a\n" +
 	"\baltitude\x18\x04 \x01(\x01R\baltitude\x128\n" +
 	"\ttimestamp\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12$\n" +
-	"\tgnss_data\x18\x06 \x01(\fB\a\xfaB\x04z\x02\x10\x01R\bgnssData\"\x85\x01\n" +
+	"\tgnss_data\x18\x06 \x01(\fB\a\xfaB\x04z\x02\x10\x01R\bgnssData\x12L\n" +
+	"\x11coordinate_system\x18\a \x01(\x0e2\x15.dto.CoordinateSystemB\b\xfaB\x05\x82\x01\x02\x10\x01R\x10coordinateSystem\x121\n" +
+	"\x14coordinate_subsystem\x18\b \x01(\tR\x13coordinateSubsystem\"\xfc\x01\n" +
 	"\x12CorrectionResponse\x120\n" +
-	"\x0fcorrection_data\x18\x01 \x01(\fB\a\xfaB\x04z\x02\x10\x01R\x0ecorrectionData\x12=\n" +
-	"\fgenerated_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\vgeneratedAtB<Z:github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto;dtob\x06proto3"
+	"\x0fbase_station_id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\rbaseStationId\x120\n" +
+	"\x0fcorrection_data\x18\x02 \x01(\fB\a\xfaB\x04z\x02\x10\x01R\x0ecorrectionData\x12=\n" +
+	"\fgenerated_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vgeneratedAt\x12C\n" +
+	"\x13used_constellations\x18\x04 \x03(\x0e2\x12.dto.ConstellationR\x12usedConstellationsB<Z:github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto;dtob\x06proto3"
 
 var (
 	file_proto_dto_rover_proto_rawDescOnce sync.Once
@@ -415,16 +533,25 @@ var file_proto_dto_rover_proto_goTypes = []any{
 	(*DeregisterRoverResponse)(nil), // 3: dto.DeregisterRoverResponse
 	(*RoverRequest)(nil),            // 4: dto.RoverRequest
 	(*CorrectionResponse)(nil),      // 5: dto.CorrectionResponse
-	(*timestamppb.Timestamp)(nil),   // 6: google.protobuf.Timestamp
+	(RoverType)(0),                  // 6: dto.RoverType
+	(*timestamppb.Timestamp)(nil),   // 7: google.protobuf.Timestamp
+	(Constellation)(0),              // 8: dto.Constellation
+	(CoordinateSystem)(0),           // 9: dto.CoordinateSystem
 }
 var file_proto_dto_rover_proto_depIdxs = []int32{
-	6, // 0: dto.RoverRequest.timestamp:type_name -> google.protobuf.Timestamp
-	6, // 1: dto.CorrectionResponse.generated_at:type_name -> google.protobuf.Timestamp
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	6, // 0: dto.RegisterRoverRequest.rover_type:type_name -> dto.RoverType
+	7, // 1: dto.RegisterRoverRequest.subscription_expires_at:type_name -> google.protobuf.Timestamp
+	8, // 2: dto.RegisterRoverRequest.constellations:type_name -> dto.Constellation
+	7, // 3: dto.RegisterRoverResponse.registered_at:type_name -> google.protobuf.Timestamp
+	7, // 4: dto.RoverRequest.timestamp:type_name -> google.protobuf.Timestamp
+	9, // 5: dto.RoverRequest.coordinate_system:type_name -> dto.CoordinateSystem
+	7, // 6: dto.CorrectionResponse.generated_at:type_name -> google.protobuf.Timestamp
+	8, // 7: dto.CorrectionResponse.used_constellations:type_name -> dto.Constellation
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_proto_dto_rover_proto_init() }
@@ -432,6 +559,7 @@ func file_proto_dto_rover_proto_init() {
 	if File_proto_dto_rover_proto != nil {
 		return
 	}
+	file_proto_dto_enums_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

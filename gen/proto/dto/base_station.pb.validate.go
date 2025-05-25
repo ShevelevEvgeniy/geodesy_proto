@@ -242,7 +242,18 @@ func (m *BaseStationInfo) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Comment
+	if _, ok := CoordinateSystem_name[int32(m.GetCoordinateSystem())]; !ok {
+		err := BaseStationInfoValidationError{
+			field:  "CoordinateSystem",
+			reason: "value must be one of the defined enum values",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for CoordinateSubsystem
 
 	if len(errors) > 0 {
 		return BaseStationInfoMultiError(errors)
@@ -366,11 +377,11 @@ func (m *BaseStationResponse) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetStation()).(type) {
+		switch v := interface{}(m.GetBaseStationInfo()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, BaseStationResponseValidationError{
-					field:  "Station",
+					field:  "BaseStationInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -378,16 +389,16 @@ func (m *BaseStationResponse) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, BaseStationResponseValidationError{
-					field:  "Station",
+					field:  "BaseStationInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetStation()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetBaseStationInfo()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return BaseStationResponseValidationError{
-				field:  "Station",
+				field:  "BaseStationInfo",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -496,10 +507,11 @@ func (m *ActivateRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetBaseStationId() <= 0 {
-		err := ActivateRequestValidationError{
+	if err := m._validateUuid(m.GetBaseStationId()); err != nil {
+		err = ActivateRequestValidationError{
 			field:  "BaseStationId",
-			reason: "value must be greater than 0",
+			reason: "value must be a valid UUID",
+			cause:  err,
 		}
 		if !all {
 			return err
@@ -509,6 +521,14 @@ func (m *ActivateRequest) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return ActivateRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *ActivateRequest) _validateUuid(uuid string) error {
+	if matched := _base_station_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
@@ -607,10 +627,11 @@ func (m *DeactivateRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetBaseStationId() <= 0 {
-		err := DeactivateRequestValidationError{
+	if err := m._validateUuid(m.GetBaseStationId()); err != nil {
+		err = DeactivateRequestValidationError{
 			field:  "BaseStationId",
-			reason: "value must be greater than 0",
+			reason: "value must be a valid UUID",
+			cause:  err,
 		}
 		if !all {
 			return err
@@ -620,6 +641,14 @@ func (m *DeactivateRequest) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return DeactivateRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *DeactivateRequest) _validateUuid(uuid string) error {
+	if matched := _base_station_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
@@ -720,9 +749,9 @@ func (m *BaseStationList) validate(all bool) error {
 
 	var errors []error
 
-	if len(m.GetStations()) < 1 {
+	if len(m.GetBaseStations()) < 1 {
 		err := BaseStationListValidationError{
-			field:  "Stations",
+			field:  "BaseStations",
 			reason: "value must contain at least 1 item(s)",
 		}
 		if !all {
@@ -731,7 +760,7 @@ func (m *BaseStationList) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	for idx, item := range m.GetStations() {
+	for idx, item := range m.GetBaseStations() {
 		_, _ = idx, item
 
 		if all {
@@ -739,7 +768,7 @@ func (m *BaseStationList) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, BaseStationListValidationError{
-						field:  fmt.Sprintf("Stations[%v]", idx),
+						field:  fmt.Sprintf("BaseStations[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -747,7 +776,7 @@ func (m *BaseStationList) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, BaseStationListValidationError{
-						field:  fmt.Sprintf("Stations[%v]", idx),
+						field:  fmt.Sprintf("BaseStations[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -756,7 +785,7 @@ func (m *BaseStationList) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return BaseStationListValidationError{
-					field:  fmt.Sprintf("Stations[%v]", idx),
+					field:  fmt.Sprintf("BaseStations[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

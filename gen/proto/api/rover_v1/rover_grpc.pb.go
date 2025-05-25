@@ -20,139 +20,139 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	GNSSCorrectionService_RegisterRover_FullMethodName   = "/rover_v1.GNSSCorrectionService/RegisterRover"
-	GNSSCorrectionService_DeregisterRover_FullMethodName = "/rover_v1.GNSSCorrectionService/DeregisterRover"
+	RoverService_RegisterRover_FullMethodName   = "/rover_v1.RoverService/RegisterRover"
+	RoverService_DeregisterRover_FullMethodName = "/rover_v1.RoverService/DeregisterRover"
 )
 
-// GNSSCorrectionServiceClient is the client API for GNSSCorrectionService service.
+// RoverServiceClient is the client API for RoverService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GNSSCorrectionServiceClient interface {
+type RoverServiceClient interface {
 	RegisterRover(ctx context.Context, in *dto.RegisterRoverRequest, opts ...grpc.CallOption) (*dto.RegisterRoverResponse, error)
 	DeregisterRover(ctx context.Context, in *dto.RoverID, opts ...grpc.CallOption) (*dto.DeregisterRoverResponse, error)
 }
 
-type gNSSCorrectionServiceClient struct {
+type roverServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewGNSSCorrectionServiceClient(cc grpc.ClientConnInterface) GNSSCorrectionServiceClient {
-	return &gNSSCorrectionServiceClient{cc}
+func NewRoverServiceClient(cc grpc.ClientConnInterface) RoverServiceClient {
+	return &roverServiceClient{cc}
 }
 
-func (c *gNSSCorrectionServiceClient) RegisterRover(ctx context.Context, in *dto.RegisterRoverRequest, opts ...grpc.CallOption) (*dto.RegisterRoverResponse, error) {
+func (c *roverServiceClient) RegisterRover(ctx context.Context, in *dto.RegisterRoverRequest, opts ...grpc.CallOption) (*dto.RegisterRoverResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(dto.RegisterRoverResponse)
-	err := c.cc.Invoke(ctx, GNSSCorrectionService_RegisterRover_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, RoverService_RegisterRover_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gNSSCorrectionServiceClient) DeregisterRover(ctx context.Context, in *dto.RoverID, opts ...grpc.CallOption) (*dto.DeregisterRoverResponse, error) {
+func (c *roverServiceClient) DeregisterRover(ctx context.Context, in *dto.RoverID, opts ...grpc.CallOption) (*dto.DeregisterRoverResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(dto.DeregisterRoverResponse)
-	err := c.cc.Invoke(ctx, GNSSCorrectionService_DeregisterRover_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, RoverService_DeregisterRover_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// GNSSCorrectionServiceServer is the server API for GNSSCorrectionService service.
-// All implementations must embed UnimplementedGNSSCorrectionServiceServer
+// RoverServiceServer is the server API for RoverService service.
+// All implementations must embed UnimplementedRoverServiceServer
 // for forward compatibility.
-type GNSSCorrectionServiceServer interface {
+type RoverServiceServer interface {
 	RegisterRover(context.Context, *dto.RegisterRoverRequest) (*dto.RegisterRoverResponse, error)
 	DeregisterRover(context.Context, *dto.RoverID) (*dto.DeregisterRoverResponse, error)
-	mustEmbedUnimplementedGNSSCorrectionServiceServer()
+	mustEmbedUnimplementedRoverServiceServer()
 }
 
-// UnimplementedGNSSCorrectionServiceServer must be embedded to have
+// UnimplementedRoverServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedGNSSCorrectionServiceServer struct{}
+type UnimplementedRoverServiceServer struct{}
 
-func (UnimplementedGNSSCorrectionServiceServer) RegisterRover(context.Context, *dto.RegisterRoverRequest) (*dto.RegisterRoverResponse, error) {
+func (UnimplementedRoverServiceServer) RegisterRover(context.Context, *dto.RegisterRoverRequest) (*dto.RegisterRoverResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterRover not implemented")
 }
-func (UnimplementedGNSSCorrectionServiceServer) DeregisterRover(context.Context, *dto.RoverID) (*dto.DeregisterRoverResponse, error) {
+func (UnimplementedRoverServiceServer) DeregisterRover(context.Context, *dto.RoverID) (*dto.DeregisterRoverResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeregisterRover not implemented")
 }
-func (UnimplementedGNSSCorrectionServiceServer) mustEmbedUnimplementedGNSSCorrectionServiceServer() {}
-func (UnimplementedGNSSCorrectionServiceServer) testEmbeddedByValue()                               {}
+func (UnimplementedRoverServiceServer) mustEmbedUnimplementedRoverServiceServer() {}
+func (UnimplementedRoverServiceServer) testEmbeddedByValue()                      {}
 
-// UnsafeGNSSCorrectionServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GNSSCorrectionServiceServer will
+// UnsafeRoverServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to RoverServiceServer will
 // result in compilation errors.
-type UnsafeGNSSCorrectionServiceServer interface {
-	mustEmbedUnimplementedGNSSCorrectionServiceServer()
+type UnsafeRoverServiceServer interface {
+	mustEmbedUnimplementedRoverServiceServer()
 }
 
-func RegisterGNSSCorrectionServiceServer(s grpc.ServiceRegistrar, srv GNSSCorrectionServiceServer) {
-	// If the following call pancis, it indicates UnimplementedGNSSCorrectionServiceServer was
+func RegisterRoverServiceServer(s grpc.ServiceRegistrar, srv RoverServiceServer) {
+	// If the following call pancis, it indicates UnimplementedRoverServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&GNSSCorrectionService_ServiceDesc, srv)
+	s.RegisterService(&RoverService_ServiceDesc, srv)
 }
 
-func _GNSSCorrectionService_RegisterRover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RoverService_RegisterRover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(dto.RegisterRoverRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GNSSCorrectionServiceServer).RegisterRover(ctx, in)
+		return srv.(RoverServiceServer).RegisterRover(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GNSSCorrectionService_RegisterRover_FullMethodName,
+		FullMethod: RoverService_RegisterRover_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GNSSCorrectionServiceServer).RegisterRover(ctx, req.(*dto.RegisterRoverRequest))
+		return srv.(RoverServiceServer).RegisterRover(ctx, req.(*dto.RegisterRoverRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GNSSCorrectionService_DeregisterRover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RoverService_DeregisterRover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(dto.RoverID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GNSSCorrectionServiceServer).DeregisterRover(ctx, in)
+		return srv.(RoverServiceServer).DeregisterRover(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GNSSCorrectionService_DeregisterRover_FullMethodName,
+		FullMethod: RoverService_DeregisterRover_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GNSSCorrectionServiceServer).DeregisterRover(ctx, req.(*dto.RoverID))
+		return srv.(RoverServiceServer).DeregisterRover(ctx, req.(*dto.RoverID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// GNSSCorrectionService_ServiceDesc is the grpc.ServiceDesc for GNSSCorrectionService service.
+// RoverService_ServiceDesc is the grpc.ServiceDesc for RoverService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var GNSSCorrectionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "rover_v1.GNSSCorrectionService",
-	HandlerType: (*GNSSCorrectionServiceServer)(nil),
+var RoverService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "rover_v1.RoverService",
+	HandlerType: (*RoverServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "RegisterRover",
-			Handler:    _GNSSCorrectionService_RegisterRover_Handler,
+			Handler:    _RoverService_RegisterRover_Handler,
 		},
 		{
 			MethodName: "DeregisterRover",
-			Handler:    _GNSSCorrectionService_DeregisterRover_Handler,
+			Handler:    _RoverService_DeregisterRover_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

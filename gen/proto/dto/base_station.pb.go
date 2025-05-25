@@ -23,74 +23,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type BaseStationStatus int32
-
-const (
-	BaseStationStatus_BASE_STATION_STATUS_UNSPECIFIED BaseStationStatus = 0
-	BaseStationStatus_ACTIVE                          BaseStationStatus = 1
-	BaseStationStatus_INACTIVE                        BaseStationStatus = 2
-)
-
-// Enum value maps for BaseStationStatus.
-var (
-	BaseStationStatus_name = map[int32]string{
-		0: "BASE_STATION_STATUS_UNSPECIFIED",
-		1: "ACTIVE",
-		2: "INACTIVE",
-	}
-	BaseStationStatus_value = map[string]int32{
-		"BASE_STATION_STATUS_UNSPECIFIED": 0,
-		"ACTIVE":                          1,
-		"INACTIVE":                        2,
-	}
-)
-
-func (x BaseStationStatus) Enum() *BaseStationStatus {
-	p := new(BaseStationStatus)
-	*p = x
-	return p
-}
-
-func (x BaseStationStatus) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (BaseStationStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_proto_dto_base_station_proto_enumTypes[0].Descriptor()
-}
-
-func (BaseStationStatus) Type() protoreflect.EnumType {
-	return &file_proto_dto_base_station_proto_enumTypes[0]
-}
-
-func (x BaseStationStatus) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use BaseStationStatus.Descriptor instead.
-func (BaseStationStatus) EnumDescriptor() ([]byte, []int) {
-	return file_proto_dto_base_station_proto_rawDescGZIP(), []int{0}
-}
-
 type BaseStationInfo struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name             string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Latitude         float64                `protobuf:"fixed64,3,opt,name=latitude,proto3" json:"latitude,omitempty"`
-	Longitude        float64                `protobuf:"fixed64,4,opt,name=longitude,proto3" json:"longitude,omitempty"`
-	Altitude         float64                `protobuf:"fixed64,5,opt,name=altitude,proto3" json:"altitude,omitempty"`
-	AntennaType      string                 `protobuf:"bytes,6,opt,name=antenna_type,json=antennaType,proto3" json:"antenna_type,omitempty"`
-	AntennaHeight    float64                `protobuf:"fixed64,7,opt,name=antenna_height,json=antennaHeight,proto3" json:"antenna_height,omitempty"`
-	ReceiverType     string                 `protobuf:"bytes,8,opt,name=receiver_type,json=receiverType,proto3" json:"receiver_type,omitempty"`
-	ReceiverSerial   string                 `protobuf:"bytes,9,opt,name=receiver_serial,json=receiverSerial,proto3" json:"receiver_serial,omitempty"`
-	FirmwareVersion  string                 `protobuf:"bytes,10,opt,name=firmware_version,json=firmwareVersion,proto3" json:"firmware_version,omitempty"`
-	Constellations   []string               `protobuf:"bytes,11,rep,name=constellations,proto3" json:"constellations,omitempty"`
-	Status           BaseStationStatus      `protobuf:"varint,12,opt,name=status,proto3,enum=dto.BaseStationStatus" json:"status,omitempty"`
-	LastCalibratedAt *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=last_calibrated_at,json=lastCalibratedAt,proto3" json:"last_calibrated_at,omitempty"`
-	InstalledAt      *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=installed_at,json=installedAt,proto3" json:"installed_at,omitempty"`
-	Comment          string                 `protobuf:"bytes,15,opt,name=comment,proto3" json:"comment,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Id                  string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Latitude            float64                `protobuf:"fixed64,3,opt,name=latitude,proto3" json:"latitude,omitempty"`
+	Longitude           float64                `protobuf:"fixed64,4,opt,name=longitude,proto3" json:"longitude,omitempty"`
+	Altitude            float64                `protobuf:"fixed64,5,opt,name=altitude,proto3" json:"altitude,omitempty"`
+	AntennaType         string                 `protobuf:"bytes,6,opt,name=antenna_type,json=antennaType,proto3" json:"antenna_type,omitempty"`
+	AntennaHeight       float64                `protobuf:"fixed64,7,opt,name=antenna_height,json=antennaHeight,proto3" json:"antenna_height,omitempty"`
+	ReceiverType        string                 `protobuf:"bytes,8,opt,name=receiver_type,json=receiverType,proto3" json:"receiver_type,omitempty"`
+	ReceiverSerial      string                 `protobuf:"bytes,9,opt,name=receiver_serial,json=receiverSerial,proto3" json:"receiver_serial,omitempty"`
+	FirmwareVersion     string                 `protobuf:"bytes,10,opt,name=firmware_version,json=firmwareVersion,proto3" json:"firmware_version,omitempty"`
+	Constellations      []Constellation        `protobuf:"varint,11,rep,packed,name=constellations,proto3,enum=dto.Constellation" json:"constellations,omitempty"`
+	Status              BaseStationStatus      `protobuf:"varint,12,opt,name=status,proto3,enum=dto.BaseStationStatus" json:"status,omitempty"`
+	LastCalibratedAt    *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=last_calibrated_at,json=lastCalibratedAt,proto3" json:"last_calibrated_at,omitempty"`
+	InstalledAt         *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=installed_at,json=installedAt,proto3" json:"installed_at,omitempty"`
+	CoordinateSystem    CoordinateSystem       `protobuf:"varint,15,opt,name=coordinate_system,json=coordinateSystem,proto3,enum=dto.CoordinateSystem" json:"coordinate_system,omitempty"`
+	CoordinateSubsystem string                 `protobuf:"bytes,16,opt,name=coordinate_subsystem,json=coordinateSubsystem,proto3" json:"coordinate_subsystem,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *BaseStationInfo) Reset() {
@@ -193,7 +145,7 @@ func (x *BaseStationInfo) GetFirmwareVersion() string {
 	return ""
 }
 
-func (x *BaseStationInfo) GetConstellations() []string {
+func (x *BaseStationInfo) GetConstellations() []Constellation {
 	if x != nil {
 		return x.Constellations
 	}
@@ -221,20 +173,27 @@ func (x *BaseStationInfo) GetInstalledAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *BaseStationInfo) GetComment() string {
+func (x *BaseStationInfo) GetCoordinateSystem() CoordinateSystem {
 	if x != nil {
-		return x.Comment
+		return x.CoordinateSystem
+	}
+	return CoordinateSystem_COORD_SYS_UNSPECIFIED
+}
+
+func (x *BaseStationInfo) GetCoordinateSubsystem() string {
+	if x != nil {
+		return x.CoordinateSubsystem
 	}
 	return ""
 }
 
 type BaseStationResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	Station       *BaseStationInfo       `protobuf:"bytes,3,opt,name=station,proto3" json:"station,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Success         bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message         string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	BaseStationInfo *BaseStationInfo       `protobuf:"bytes,3,opt,name=base_station_info,json=baseStationInfo,proto3" json:"base_station_info,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *BaseStationResponse) Reset() {
@@ -281,16 +240,16 @@ func (x *BaseStationResponse) GetMessage() string {
 	return ""
 }
 
-func (x *BaseStationResponse) GetStation() *BaseStationInfo {
+func (x *BaseStationResponse) GetBaseStationInfo() *BaseStationInfo {
 	if x != nil {
-		return x.Station
+		return x.BaseStationInfo
 	}
 	return nil
 }
 
 type ActivateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BaseStationId int32                  `protobuf:"varint,1,opt,name=base_station_id,json=baseStationId,proto3" json:"base_station_id,omitempty"`
+	BaseStationId string                 `protobuf:"bytes,1,opt,name=base_station_id,json=baseStationId,proto3" json:"base_station_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -325,16 +284,16 @@ func (*ActivateRequest) Descriptor() ([]byte, []int) {
 	return file_proto_dto_base_station_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ActivateRequest) GetBaseStationId() int32 {
+func (x *ActivateRequest) GetBaseStationId() string {
 	if x != nil {
 		return x.BaseStationId
 	}
-	return 0
+	return ""
 }
 
 type DeactivateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BaseStationId int32                  `protobuf:"varint,1,opt,name=base_station_id,json=baseStationId,proto3" json:"base_station_id,omitempty"`
+	BaseStationId string                 `protobuf:"bytes,1,opt,name=base_station_id,json=baseStationId,proto3" json:"base_station_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -369,16 +328,16 @@ func (*DeactivateRequest) Descriptor() ([]byte, []int) {
 	return file_proto_dto_base_station_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *DeactivateRequest) GetBaseStationId() int32 {
+func (x *DeactivateRequest) GetBaseStationId() string {
 	if x != nil {
 		return x.BaseStationId
 	}
-	return 0
+	return ""
 }
 
 type BaseStationList struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Stations      []*BaseStationInfo     `protobuf:"bytes,1,rep,name=stations,proto3" json:"stations,omitempty"`
+	BaseStations  []*BaseStationInfo     `protobuf:"bytes,1,rep,name=base_stations,json=baseStations,proto3" json:"base_stations,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -413,9 +372,9 @@ func (*BaseStationList) Descriptor() ([]byte, []int) {
 	return file_proto_dto_base_station_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *BaseStationList) GetStations() []*BaseStationInfo {
+func (x *BaseStationList) GetBaseStations() []*BaseStationInfo {
 	if x != nil {
-		return x.Stations
+		return x.BaseStations
 	}
 	return nil
 }
@@ -424,7 +383,7 @@ var File_proto_dto_base_station_proto protoreflect.FileDescriptor
 
 const file_proto_dto_base_station_proto_rawDesc = "" +
 	"\n" +
-	"\x1cproto/dto/base_station.proto\x12\x03dto\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd6\x05\n" +
+	"\x1cproto/dto/base_station.proto\x12\x03dto\x1a2vendor/protoc-gen-validate/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x15proto/dto/enums.proto\"\xd1\x06\n" +
 	"\x0fBaseStationInfo\x12\x18\n" +
 	"\x02id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\x123\n" +
@@ -436,27 +395,23 @@ const file_proto_dto_base_station_proto_rawDesc = "" +
 	"\rreceiver_type\x18\b \x01(\tB\a\xfaB\x04r\x02\x10\x01R\freceiverType\x120\n" +
 	"\x0freceiver_serial\x18\t \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x0ereceiverSerial\x122\n" +
 	"\x10firmware_version\x18\n" +
-	" \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x0ffirmwareVersion\x120\n" +
-	"\x0econstellations\x18\v \x03(\tB\b\xfaB\x05\x92\x01\x02\b\x01R\x0econstellations\x128\n" +
+	" \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x0ffirmwareVersion\x12D\n" +
+	"\x0econstellations\x18\v \x03(\x0e2\x12.dto.ConstellationB\b\xfaB\x05\x92\x01\x02\b\x01R\x0econstellations\x128\n" +
 	"\x06status\x18\f \x01(\x0e2\x16.dto.BaseStationStatusB\b\xfaB\x05\x82\x01\x02\x10\x01R\x06status\x12H\n" +
 	"\x12last_calibrated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\x10lastCalibratedAt\x12=\n" +
-	"\finstalled_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\vinstalledAt\x12\x18\n" +
-	"\acomment\x18\x0f \x01(\tR\acomment\"\x82\x01\n" +
+	"\finstalled_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\vinstalledAt\x12L\n" +
+	"\x11coordinate_system\x18\x0f \x01(\x0e2\x15.dto.CoordinateSystemB\b\xfaB\x05\x82\x01\x02\x10\x01R\x10coordinateSystem\x121\n" +
+	"\x14coordinate_subsystem\x18\x10 \x01(\tR\x13coordinateSubsystem\"\x94\x01\n" +
 	"\x13BaseStationResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12!\n" +
-	"\amessage\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\amessage\x12.\n" +
-	"\astation\x18\x03 \x01(\v2\x14.dto.BaseStationInfoR\astation\"B\n" +
-	"\x0fActivateRequest\x12/\n" +
-	"\x0fbase_station_id\x18\x01 \x01(\x05B\a\xfaB\x04\x1a\x02 \x00R\rbaseStationId\"D\n" +
-	"\x11DeactivateRequest\x12/\n" +
-	"\x0fbase_station_id\x18\x01 \x01(\x05B\a\xfaB\x04\x1a\x02 \x00R\rbaseStationId\"M\n" +
-	"\x0fBaseStationList\x12:\n" +
-	"\bstations\x18\x01 \x03(\v2\x14.dto.BaseStationInfoB\b\xfaB\x05\x92\x01\x02\b\x01R\bstations*R\n" +
-	"\x11BaseStationStatus\x12#\n" +
-	"\x1fBASE_STATION_STATUS_UNSPECIFIED\x10\x00\x12\n" +
-	"\n" +
-	"\x06ACTIVE\x10\x01\x12\f\n" +
-	"\bINACTIVE\x10\x02B<Z:github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto;dtob\x06proto3"
+	"\amessage\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\amessage\x12@\n" +
+	"\x11base_station_info\x18\x03 \x01(\v2\x14.dto.BaseStationInfoR\x0fbaseStationInfo\"C\n" +
+	"\x0fActivateRequest\x120\n" +
+	"\x0fbase_station_id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\rbaseStationId\"E\n" +
+	"\x11DeactivateRequest\x120\n" +
+	"\x0fbase_station_id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\rbaseStationId\"V\n" +
+	"\x0fBaseStationList\x12C\n" +
+	"\rbase_stations\x18\x01 \x03(\v2\x14.dto.BaseStationInfoB\b\xfaB\x05\x92\x01\x02\b\x01R\fbaseStationsB<Z:github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto;dtob\x06proto3"
 
 var (
 	file_proto_dto_base_station_proto_rawDescOnce sync.Once
@@ -470,28 +425,31 @@ func file_proto_dto_base_station_proto_rawDescGZIP() []byte {
 	return file_proto_dto_base_station_proto_rawDescData
 }
 
-var file_proto_dto_base_station_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_proto_dto_base_station_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_proto_dto_base_station_proto_goTypes = []any{
-	(BaseStationStatus)(0),        // 0: dto.BaseStationStatus
-	(*BaseStationInfo)(nil),       // 1: dto.BaseStationInfo
-	(*BaseStationResponse)(nil),   // 2: dto.BaseStationResponse
-	(*ActivateRequest)(nil),       // 3: dto.ActivateRequest
-	(*DeactivateRequest)(nil),     // 4: dto.DeactivateRequest
-	(*BaseStationList)(nil),       // 5: dto.BaseStationList
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*BaseStationInfo)(nil),       // 0: dto.BaseStationInfo
+	(*BaseStationResponse)(nil),   // 1: dto.BaseStationResponse
+	(*ActivateRequest)(nil),       // 2: dto.ActivateRequest
+	(*DeactivateRequest)(nil),     // 3: dto.DeactivateRequest
+	(*BaseStationList)(nil),       // 4: dto.BaseStationList
+	(Constellation)(0),            // 5: dto.Constellation
+	(BaseStationStatus)(0),        // 6: dto.BaseStationStatus
+	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
+	(CoordinateSystem)(0),         // 8: dto.CoordinateSystem
 }
 var file_proto_dto_base_station_proto_depIdxs = []int32{
-	0, // 0: dto.BaseStationInfo.status:type_name -> dto.BaseStationStatus
-	6, // 1: dto.BaseStationInfo.last_calibrated_at:type_name -> google.protobuf.Timestamp
-	6, // 2: dto.BaseStationInfo.installed_at:type_name -> google.protobuf.Timestamp
-	1, // 3: dto.BaseStationResponse.station:type_name -> dto.BaseStationInfo
-	1, // 4: dto.BaseStationList.stations:type_name -> dto.BaseStationInfo
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	5, // 0: dto.BaseStationInfo.constellations:type_name -> dto.Constellation
+	6, // 1: dto.BaseStationInfo.status:type_name -> dto.BaseStationStatus
+	7, // 2: dto.BaseStationInfo.last_calibrated_at:type_name -> google.protobuf.Timestamp
+	7, // 3: dto.BaseStationInfo.installed_at:type_name -> google.protobuf.Timestamp
+	8, // 4: dto.BaseStationInfo.coordinate_system:type_name -> dto.CoordinateSystem
+	0, // 5: dto.BaseStationResponse.base_station_info:type_name -> dto.BaseStationInfo
+	0, // 6: dto.BaseStationList.base_stations:type_name -> dto.BaseStationInfo
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_proto_dto_base_station_proto_init() }
@@ -499,19 +457,19 @@ func file_proto_dto_base_station_proto_init() {
 	if File_proto_dto_base_station_proto != nil {
 		return
 	}
+	file_proto_dto_enums_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_dto_base_station_proto_rawDesc), len(file_proto_dto_base_station_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      0,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_proto_dto_base_station_proto_goTypes,
 		DependencyIndexes: file_proto_dto_base_station_proto_depIdxs,
-		EnumInfos:         file_proto_dto_base_station_proto_enumTypes,
 		MessageInfos:      file_proto_dto_base_station_proto_msgTypes,
 	}.Build()
 	File_proto_dto_base_station_proto = out.File

@@ -6,16 +6,24 @@ option go_package = "github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto;dto"
 
 import "vendor/protoc-gen-validate/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
+import "proto/dto/enums.proto";
 
 message RegisterRoverRequest {
+  string owner_id = 1 [(validate.rules).string.uuid = true];
   string name = 2 [(validate.rules).string.min_len = 3];
-  bool is_active = 3;
-  double max_distance_km = 4 [(validate.rules).double.gt = 0];
+  RoverType rover_type = 3 [(validate.rules).enum = {defined_only: true}];
+  google.protobuf.Timestamp subscription_expires_at = 4;
+  string serial_number = 5 [(validate.rules).string.min_len = 3];
+  bool is_active = 6;
+  repeated Constellation constellations = 11 [(validate.rules).repeated.min_items = 1];
+  double max_distance_km = 7 [(validate.rules).double.gt = 0];
 }
 
 message RegisterRoverResponse {
   bool success = 1;
-  string message = 2 [(validate.rules).string.min_len = 1];
+  string rover_id = 2 [(validate.rules).string.uuid = true];
+  string owner_id = 3 [(validate.rules).string.uuid = true];
+  google.protobuf.Timestamp registered_at = 4;
 }
 
 message RoverID {
@@ -24,7 +32,9 @@ message RoverID {
 
 message DeregisterRoverResponse {
   bool success = 1;
-  string message = 2 [(validate.rules).string.min_len = 1];
+  string rover_id = 2 [(validate.rules).string.uuid = true];
+  string owner_id = 3 [(validate.rules).string.uuid = true];
+  string message = 4 [(validate.rules).string.min_len = 1];
 }
 
 message RoverRequest {
@@ -34,9 +44,13 @@ message RoverRequest {
   double altitude = 4;
   google.protobuf.Timestamp timestamp = 5;
   bytes gnss_data = 6 [(validate.rules).bytes.min_len = 1];
+  CoordinateSystem coordinate_system = 7 [(validate.rules).enum = {defined_only: true}];
+  string coordinate_subsystem = 8;
 }
 
 message CorrectionResponse {
-  bytes correction_data = 1 [(validate.rules).bytes.min_len = 1];
-  google.protobuf.Timestamp generated_at = 2;
+  string base_station_id = 1 [(validate.rules).string.uuid = true];
+  bytes correction_data = 2 [(validate.rules).bytes.min_len = 1];
+  google.protobuf.Timestamp generated_at = 3;
+  repeated Constellation used_constellations = 4;
 }

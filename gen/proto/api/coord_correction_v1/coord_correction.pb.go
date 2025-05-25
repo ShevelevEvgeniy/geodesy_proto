@@ -25,8 +25,8 @@ var File_proto_api_coord_correction_v1_coord_correction_proto protoreflect.FileD
 
 const file_proto_api_coord_correction_v1_coord_correction_proto_rawDesc = "" +
 	"\n" +
-	"4proto/api/coord_correction_v1/coord_correction.proto\x12\x13coord_correction_v1\x1a\x15proto/dto/rover.proto2\\\n" +
-	"\x15GNSSCorrectionService\x12C\n" +
+	"4proto/api/coord_correction_v1/coord_correction.proto\x12\x13coord_correction_v1\x1a\x15proto/dto/rover.proto2c\n" +
+	"\x1cCoordinatesCorrectionService\x12C\n" +
 	"\x11StreamCorrections\x12\x11.dto.RoverRequest\x1a\x17.dto.CorrectionResponse(\x010\x01B`Z^github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/api/coord_correction_v1;coord_correction_v1b\x06proto3"
 
 var file_proto_api_coord_correction_v1_coord_correction_proto_goTypes = []any{
@@ -34,8 +34,8 @@ var file_proto_api_coord_correction_v1_coord_correction_proto_goTypes = []any{
 	(*dto.CorrectionResponse)(nil), // 1: dto.CorrectionResponse
 }
 var file_proto_api_coord_correction_v1_coord_correction_proto_depIdxs = []int32{
-	0, // 0: coord_correction_v1.GNSSCorrectionService.StreamCorrections:input_type -> dto.RoverRequest
-	1, // 1: coord_correction_v1.GNSSCorrectionService.StreamCorrections:output_type -> dto.CorrectionResponse
+	0, // 0: coord_correction_v1.CoordinatesCorrectionService.StreamCorrections:input_type -> dto.RoverRequest
+	1, // 1: coord_correction_v1.CoordinatesCorrectionService.StreamCorrections:output_type -> dto.CorrectionResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

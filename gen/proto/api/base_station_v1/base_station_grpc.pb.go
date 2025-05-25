@@ -20,17 +20,17 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	GNSSCorrectionService_AddBaseStation_FullMethodName        = "/base_station_v1.GNSSCorrectionService/AddBaseStation"
-	GNSSCorrectionService_UpdateBaseStation_FullMethodName     = "/base_station_v1.GNSSCorrectionService/UpdateBaseStation"
-	GNSSCorrectionService_ActivateBaseStation_FullMethodName   = "/base_station_v1.GNSSCorrectionService/ActivateBaseStation"
-	GNSSCorrectionService_DeactivateBaseStation_FullMethodName = "/base_station_v1.GNSSCorrectionService/DeactivateBaseStation"
-	GNSSCorrectionService_ListAvailableStations_FullMethodName = "/base_station_v1.GNSSCorrectionService/ListAvailableStations"
+	BaseStationService_AddBaseStation_FullMethodName        = "/base_station_v1.BaseStationService/AddBaseStation"
+	BaseStationService_UpdateBaseStation_FullMethodName     = "/base_station_v1.BaseStationService/UpdateBaseStation"
+	BaseStationService_ActivateBaseStation_FullMethodName   = "/base_station_v1.BaseStationService/ActivateBaseStation"
+	BaseStationService_DeactivateBaseStation_FullMethodName = "/base_station_v1.BaseStationService/DeactivateBaseStation"
+	BaseStationService_ListAvailableStations_FullMethodName = "/base_station_v1.BaseStationService/ListAvailableStations"
 )
 
-// GNSSCorrectionServiceClient is the client API for GNSSCorrectionService service.
+// BaseStationServiceClient is the client API for BaseStationService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GNSSCorrectionServiceClient interface {
+type BaseStationServiceClient interface {
 	AddBaseStation(ctx context.Context, in *dto.BaseStationInfo, opts ...grpc.CallOption) (*dto.BaseStationResponse, error)
 	UpdateBaseStation(ctx context.Context, in *dto.BaseStationInfo, opts ...grpc.CallOption) (*dto.BaseStationResponse, error)
 	ActivateBaseStation(ctx context.Context, in *dto.ActivateRequest, opts ...grpc.CallOption) (*dto.BaseStationResponse, error)
@@ -38,235 +38,235 @@ type GNSSCorrectionServiceClient interface {
 	ListAvailableStations(ctx context.Context, in *dto.RoverID, opts ...grpc.CallOption) (*dto.BaseStationList, error)
 }
 
-type gNSSCorrectionServiceClient struct {
+type baseStationServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewGNSSCorrectionServiceClient(cc grpc.ClientConnInterface) GNSSCorrectionServiceClient {
-	return &gNSSCorrectionServiceClient{cc}
+func NewBaseStationServiceClient(cc grpc.ClientConnInterface) BaseStationServiceClient {
+	return &baseStationServiceClient{cc}
 }
 
-func (c *gNSSCorrectionServiceClient) AddBaseStation(ctx context.Context, in *dto.BaseStationInfo, opts ...grpc.CallOption) (*dto.BaseStationResponse, error) {
+func (c *baseStationServiceClient) AddBaseStation(ctx context.Context, in *dto.BaseStationInfo, opts ...grpc.CallOption) (*dto.BaseStationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(dto.BaseStationResponse)
-	err := c.cc.Invoke(ctx, GNSSCorrectionService_AddBaseStation_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BaseStationService_AddBaseStation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gNSSCorrectionServiceClient) UpdateBaseStation(ctx context.Context, in *dto.BaseStationInfo, opts ...grpc.CallOption) (*dto.BaseStationResponse, error) {
+func (c *baseStationServiceClient) UpdateBaseStation(ctx context.Context, in *dto.BaseStationInfo, opts ...grpc.CallOption) (*dto.BaseStationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(dto.BaseStationResponse)
-	err := c.cc.Invoke(ctx, GNSSCorrectionService_UpdateBaseStation_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BaseStationService_UpdateBaseStation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gNSSCorrectionServiceClient) ActivateBaseStation(ctx context.Context, in *dto.ActivateRequest, opts ...grpc.CallOption) (*dto.BaseStationResponse, error) {
+func (c *baseStationServiceClient) ActivateBaseStation(ctx context.Context, in *dto.ActivateRequest, opts ...grpc.CallOption) (*dto.BaseStationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(dto.BaseStationResponse)
-	err := c.cc.Invoke(ctx, GNSSCorrectionService_ActivateBaseStation_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BaseStationService_ActivateBaseStation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gNSSCorrectionServiceClient) DeactivateBaseStation(ctx context.Context, in *dto.DeactivateRequest, opts ...grpc.CallOption) (*dto.BaseStationResponse, error) {
+func (c *baseStationServiceClient) DeactivateBaseStation(ctx context.Context, in *dto.DeactivateRequest, opts ...grpc.CallOption) (*dto.BaseStationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(dto.BaseStationResponse)
-	err := c.cc.Invoke(ctx, GNSSCorrectionService_DeactivateBaseStation_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BaseStationService_DeactivateBaseStation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gNSSCorrectionServiceClient) ListAvailableStations(ctx context.Context, in *dto.RoverID, opts ...grpc.CallOption) (*dto.BaseStationList, error) {
+func (c *baseStationServiceClient) ListAvailableStations(ctx context.Context, in *dto.RoverID, opts ...grpc.CallOption) (*dto.BaseStationList, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(dto.BaseStationList)
-	err := c.cc.Invoke(ctx, GNSSCorrectionService_ListAvailableStations_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BaseStationService_ListAvailableStations_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// GNSSCorrectionServiceServer is the server API for GNSSCorrectionService service.
-// All implementations must embed UnimplementedGNSSCorrectionServiceServer
+// BaseStationServiceServer is the server API for BaseStationService service.
+// All implementations must embed UnimplementedBaseStationServiceServer
 // for forward compatibility.
-type GNSSCorrectionServiceServer interface {
+type BaseStationServiceServer interface {
 	AddBaseStation(context.Context, *dto.BaseStationInfo) (*dto.BaseStationResponse, error)
 	UpdateBaseStation(context.Context, *dto.BaseStationInfo) (*dto.BaseStationResponse, error)
 	ActivateBaseStation(context.Context, *dto.ActivateRequest) (*dto.BaseStationResponse, error)
 	DeactivateBaseStation(context.Context, *dto.DeactivateRequest) (*dto.BaseStationResponse, error)
 	ListAvailableStations(context.Context, *dto.RoverID) (*dto.BaseStationList, error)
-	mustEmbedUnimplementedGNSSCorrectionServiceServer()
+	mustEmbedUnimplementedBaseStationServiceServer()
 }
 
-// UnimplementedGNSSCorrectionServiceServer must be embedded to have
+// UnimplementedBaseStationServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedGNSSCorrectionServiceServer struct{}
+type UnimplementedBaseStationServiceServer struct{}
 
-func (UnimplementedGNSSCorrectionServiceServer) AddBaseStation(context.Context, *dto.BaseStationInfo) (*dto.BaseStationResponse, error) {
+func (UnimplementedBaseStationServiceServer) AddBaseStation(context.Context, *dto.BaseStationInfo) (*dto.BaseStationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddBaseStation not implemented")
 }
-func (UnimplementedGNSSCorrectionServiceServer) UpdateBaseStation(context.Context, *dto.BaseStationInfo) (*dto.BaseStationResponse, error) {
+func (UnimplementedBaseStationServiceServer) UpdateBaseStation(context.Context, *dto.BaseStationInfo) (*dto.BaseStationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBaseStation not implemented")
 }
-func (UnimplementedGNSSCorrectionServiceServer) ActivateBaseStation(context.Context, *dto.ActivateRequest) (*dto.BaseStationResponse, error) {
+func (UnimplementedBaseStationServiceServer) ActivateBaseStation(context.Context, *dto.ActivateRequest) (*dto.BaseStationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ActivateBaseStation not implemented")
 }
-func (UnimplementedGNSSCorrectionServiceServer) DeactivateBaseStation(context.Context, *dto.DeactivateRequest) (*dto.BaseStationResponse, error) {
+func (UnimplementedBaseStationServiceServer) DeactivateBaseStation(context.Context, *dto.DeactivateRequest) (*dto.BaseStationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeactivateBaseStation not implemented")
 }
-func (UnimplementedGNSSCorrectionServiceServer) ListAvailableStations(context.Context, *dto.RoverID) (*dto.BaseStationList, error) {
+func (UnimplementedBaseStationServiceServer) ListAvailableStations(context.Context, *dto.RoverID) (*dto.BaseStationList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAvailableStations not implemented")
 }
-func (UnimplementedGNSSCorrectionServiceServer) mustEmbedUnimplementedGNSSCorrectionServiceServer() {}
-func (UnimplementedGNSSCorrectionServiceServer) testEmbeddedByValue()                               {}
+func (UnimplementedBaseStationServiceServer) mustEmbedUnimplementedBaseStationServiceServer() {}
+func (UnimplementedBaseStationServiceServer) testEmbeddedByValue()                            {}
 
-// UnsafeGNSSCorrectionServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GNSSCorrectionServiceServer will
+// UnsafeBaseStationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BaseStationServiceServer will
 // result in compilation errors.
-type UnsafeGNSSCorrectionServiceServer interface {
-	mustEmbedUnimplementedGNSSCorrectionServiceServer()
+type UnsafeBaseStationServiceServer interface {
+	mustEmbedUnimplementedBaseStationServiceServer()
 }
 
-func RegisterGNSSCorrectionServiceServer(s grpc.ServiceRegistrar, srv GNSSCorrectionServiceServer) {
-	// If the following call pancis, it indicates UnimplementedGNSSCorrectionServiceServer was
+func RegisterBaseStationServiceServer(s grpc.ServiceRegistrar, srv BaseStationServiceServer) {
+	// If the following call pancis, it indicates UnimplementedBaseStationServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&GNSSCorrectionService_ServiceDesc, srv)
+	s.RegisterService(&BaseStationService_ServiceDesc, srv)
 }
 
-func _GNSSCorrectionService_AddBaseStation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BaseStationService_AddBaseStation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(dto.BaseStationInfo)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GNSSCorrectionServiceServer).AddBaseStation(ctx, in)
+		return srv.(BaseStationServiceServer).AddBaseStation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GNSSCorrectionService_AddBaseStation_FullMethodName,
+		FullMethod: BaseStationService_AddBaseStation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GNSSCorrectionServiceServer).AddBaseStation(ctx, req.(*dto.BaseStationInfo))
+		return srv.(BaseStationServiceServer).AddBaseStation(ctx, req.(*dto.BaseStationInfo))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GNSSCorrectionService_UpdateBaseStation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BaseStationService_UpdateBaseStation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(dto.BaseStationInfo)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GNSSCorrectionServiceServer).UpdateBaseStation(ctx, in)
+		return srv.(BaseStationServiceServer).UpdateBaseStation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GNSSCorrectionService_UpdateBaseStation_FullMethodName,
+		FullMethod: BaseStationService_UpdateBaseStation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GNSSCorrectionServiceServer).UpdateBaseStation(ctx, req.(*dto.BaseStationInfo))
+		return srv.(BaseStationServiceServer).UpdateBaseStation(ctx, req.(*dto.BaseStationInfo))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GNSSCorrectionService_ActivateBaseStation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BaseStationService_ActivateBaseStation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(dto.ActivateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GNSSCorrectionServiceServer).ActivateBaseStation(ctx, in)
+		return srv.(BaseStationServiceServer).ActivateBaseStation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GNSSCorrectionService_ActivateBaseStation_FullMethodName,
+		FullMethod: BaseStationService_ActivateBaseStation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GNSSCorrectionServiceServer).ActivateBaseStation(ctx, req.(*dto.ActivateRequest))
+		return srv.(BaseStationServiceServer).ActivateBaseStation(ctx, req.(*dto.ActivateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GNSSCorrectionService_DeactivateBaseStation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BaseStationService_DeactivateBaseStation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(dto.DeactivateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GNSSCorrectionServiceServer).DeactivateBaseStation(ctx, in)
+		return srv.(BaseStationServiceServer).DeactivateBaseStation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GNSSCorrectionService_DeactivateBaseStation_FullMethodName,
+		FullMethod: BaseStationService_DeactivateBaseStation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GNSSCorrectionServiceServer).DeactivateBaseStation(ctx, req.(*dto.DeactivateRequest))
+		return srv.(BaseStationServiceServer).DeactivateBaseStation(ctx, req.(*dto.DeactivateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GNSSCorrectionService_ListAvailableStations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BaseStationService_ListAvailableStations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(dto.RoverID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GNSSCorrectionServiceServer).ListAvailableStations(ctx, in)
+		return srv.(BaseStationServiceServer).ListAvailableStations(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GNSSCorrectionService_ListAvailableStations_FullMethodName,
+		FullMethod: BaseStationService_ListAvailableStations_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GNSSCorrectionServiceServer).ListAvailableStations(ctx, req.(*dto.RoverID))
+		return srv.(BaseStationServiceServer).ListAvailableStations(ctx, req.(*dto.RoverID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// GNSSCorrectionService_ServiceDesc is the grpc.ServiceDesc for GNSSCorrectionService service.
+// BaseStationService_ServiceDesc is the grpc.ServiceDesc for BaseStationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var GNSSCorrectionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "base_station_v1.GNSSCorrectionService",
-	HandlerType: (*GNSSCorrectionServiceServer)(nil),
+var BaseStationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "base_station_v1.BaseStationService",
+	HandlerType: (*BaseStationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "AddBaseStation",
-			Handler:    _GNSSCorrectionService_AddBaseStation_Handler,
+			Handler:    _BaseStationService_AddBaseStation_Handler,
 		},
 		{
 			MethodName: "UpdateBaseStation",
-			Handler:    _GNSSCorrectionService_UpdateBaseStation_Handler,
+			Handler:    _BaseStationService_UpdateBaseStation_Handler,
 		},
 		{
 			MethodName: "ActivateBaseStation",
-			Handler:    _GNSSCorrectionService_ActivateBaseStation_Handler,
+			Handler:    _BaseStationService_ActivateBaseStation_Handler,
 		},
 		{
 			MethodName: "DeactivateBaseStation",
-			Handler:    _GNSSCorrectionService_DeactivateBaseStation_Handler,
+			Handler:    _BaseStationService_DeactivateBaseStation_Handler,
 		},
 		{
 			MethodName: "ListAvailableStations",
-			Handler:    _GNSSCorrectionService_ListAvailableStations_Handler,
+			Handler:    _BaseStationService_ListAvailableStations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

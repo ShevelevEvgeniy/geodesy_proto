@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package dto;
+
+option go_package = "github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto;dto";
+
+enum Constellation {
+  CONSTELLATION_UNSPECIFIED = 0;
+  GPS = 1;
+  GLONASS = 2;
+  GALILEO = 3;
+  BEIDOU = 4;
+  QZSS = 5;
+  SBAS = 6;
+}
+
+enum CoordinateSystem {
+  COORD_SYS_UNSPECIFIED = 0;
+  WGS84 = 1;
+  MSK = 2;
+  EPSG_3857 = 3;
+  ETRS89 = 4;
+  NAD83 = 5;
+  PULKOVO_1942 = 6;
+  GSK_2011 = 7;
+  UTM_ZONE_33N = 8;
+  LOCAL_GRID = 9;
+}
+
+enum RoverType {
+  ROVER_TYPE_UNSPECIFIED = 0;
+  GNSS = 1;
+  RTK = 2;
+  STATIC = 3;
+  MOBILE = 4;
+}
+
+enum BaseStationStatus {
+  BASE_STATION_STATUS_UNSPECIFIED = 0;
+  ACTIVE = 1;
+  INACTIVE = 2;
+}

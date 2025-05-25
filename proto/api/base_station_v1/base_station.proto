@@ -7,7 +7,7 @@ option go_package = "github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/api/base
 import "proto/dto/base_station.proto";
 import "proto/dto/rover.proto";
 
-service GNSSCorrectionService {
+service BaseStationService {
   rpc AddBaseStation(dto.BaseStationInfo) returns (dto.BaseStationResponse);
   rpc UpdateBaseStation(dto.BaseStationInfo) returns (dto.BaseStationResponse);
   rpc ActivateBaseStation(dto.ActivateRequest) returns (dto.BaseStationResponse);

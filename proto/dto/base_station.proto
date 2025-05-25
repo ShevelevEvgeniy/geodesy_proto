@@ -6,12 +6,7 @@ option go_package = "github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto;dto"
 
 import "vendor/protoc-gen-validate/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
-
-enum BaseStationStatus {
-  BASE_STATION_STATUS_UNSPECIFIED = 0;
-  ACTIVE = 1;
-  INACTIVE = 2;
-}
+import "proto/dto/enums.proto";
 
 message BaseStationInfo {
   string id = 1 [(validate.rules).string.uuid = true];
@@ -24,27 +19,28 @@ message BaseStationInfo {
   string receiver_type = 8 [(validate.rules).string.min_len = 1];
   string receiver_serial = 9 [(validate.rules).string.min_len = 1];
   string firmware_version = 10 [(validate.rules).string.min_len = 1];
-  repeated string constellations = 11 [(validate.rules).repeated.min_items = 1];
+  repeated Constellation constellations = 11 [(validate.rules).repeated.min_items = 1];
   BaseStationStatus status = 12 [(validate.rules).enum = { defined_only: true }];
   google.protobuf.Timestamp last_calibrated_at = 13;
   google.protobuf.Timestamp installed_at = 14;
-  string comment = 15;
+  CoordinateSystem coordinate_system = 15 [(validate.rules).enum = {defined_only: true}];
+  string coordinate_subsystem = 16;
 }
 
 message BaseStationResponse {
   bool success = 1;
   string message = 2 [(validate.rules).string.min_len = 1];
-  BaseStationInfo station = 3;
+  BaseStationInfo base_station_info = 3;
 }
 
 message ActivateRequest {
-  int32 base_station_id = 1 [(validate.rules).int32.gt = 0];
+  string base_station_id = 1 [(validate.rules).string.uuid = true];
 }
 
 message DeactivateRequest {
-  int32 base_station_id = 1 [(validate.rules).int32.gt = 0];
+  string base_station_id = 1 [(validate.rules).string.uuid = true];
 }
 
 message BaseStationList {
-  repeated BaseStationInfo stations = 1 [(validate.rules).repeated.min_items = 1];
+  repeated BaseStationInfo base_stations = 1 [(validate.rules).repeated.min_items = 1];
 }

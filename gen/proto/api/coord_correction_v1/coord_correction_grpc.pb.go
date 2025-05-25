@@ -20,27 +20,27 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	GNSSCorrectionService_StreamCorrections_FullMethodName = "/coord_correction_v1.GNSSCorrectionService/StreamCorrections"
+	CoordinatesCorrectionService_StreamCorrections_FullMethodName = "/coord_correction_v1.CoordinatesCorrectionService/StreamCorrections"
 )
 
-// GNSSCorrectionServiceClient is the client API for GNSSCorrectionService service.
+// CoordinatesCorrectionServiceClient is the client API for CoordinatesCorrectionService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GNSSCorrectionServiceClient interface {
+type CoordinatesCorrectionServiceClient interface {
 	StreamCorrections(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[dto.RoverRequest, dto.CorrectionResponse], error)
 }
 
-type gNSSCorrectionServiceClient struct {
+type coordinatesCorrectionServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewGNSSCorrectionServiceClient(cc grpc.ClientConnInterface) GNSSCorrectionServiceClient {
-	return &gNSSCorrectionServiceClient{cc}
+func NewCoordinatesCorrectionServiceClient(cc grpc.ClientConnInterface) CoordinatesCorrectionServiceClient {
+	return &coordinatesCorrectionServiceClient{cc}
 }
 
-func (c *gNSSCorrectionServiceClient) StreamCorrections(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[dto.RoverRequest, dto.CorrectionResponse], error) {
+func (c *coordinatesCorrectionServiceClient) StreamCorrections(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[dto.RoverRequest, dto.CorrectionResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &GNSSCorrectionService_ServiceDesc.Streams[0], GNSSCorrectionService_StreamCorrections_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &CoordinatesCorrectionService_ServiceDesc.Streams[0], CoordinatesCorrectionService_StreamCorrections_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -49,65 +49,66 @@ func (c *gNSSCorrectionServiceClient) StreamCorrections(ctx context.Context, opt
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type GNSSCorrectionService_StreamCorrectionsClient = grpc.BidiStreamingClient[dto.RoverRequest, dto.CorrectionResponse]
+type CoordinatesCorrectionService_StreamCorrectionsClient = grpc.BidiStreamingClient[dto.RoverRequest, dto.CorrectionResponse]
 
-// GNSSCorrectionServiceServer is the server API for GNSSCorrectionService service.
-// All implementations must embed UnimplementedGNSSCorrectionServiceServer
+// CoordinatesCorrectionServiceServer is the server API for CoordinatesCorrectionService service.
+// All implementations must embed UnimplementedCoordinatesCorrectionServiceServer
 // for forward compatibility.
-type GNSSCorrectionServiceServer interface {
+type CoordinatesCorrectionServiceServer interface {
 	StreamCorrections(grpc.BidiStreamingServer[dto.RoverRequest, dto.CorrectionResponse]) error
-	mustEmbedUnimplementedGNSSCorrectionServiceServer()
+	mustEmbedUnimplementedCoordinatesCorrectionServiceServer()
 }
 
-// UnimplementedGNSSCorrectionServiceServer must be embedded to have
+// UnimplementedCoordinatesCorrectionServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedGNSSCorrectionServiceServer struct{}
+type UnimplementedCoordinatesCorrectionServiceServer struct{}
 
-func (UnimplementedGNSSCorrectionServiceServer) StreamCorrections(grpc.BidiStreamingServer[dto.RoverRequest, dto.CorrectionResponse]) error {
+func (UnimplementedCoordinatesCorrectionServiceServer) StreamCorrections(grpc.BidiStreamingServer[dto.RoverRequest, dto.CorrectionResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method StreamCorrections not implemented")
 }
-func (UnimplementedGNSSCorrectionServiceServer) mustEmbedUnimplementedGNSSCorrectionServiceServer() {}
-func (UnimplementedGNSSCorrectionServiceServer) testEmbeddedByValue()                               {}
+func (UnimplementedCoordinatesCorrectionServiceServer) mustEmbedUnimplementedCoordinatesCorrectionServiceServer() {
+}
+func (UnimplementedCoordinatesCorrectionServiceServer) testEmbeddedByValue() {}
 
-// UnsafeGNSSCorrectionServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GNSSCorrectionServiceServer will
+// UnsafeCoordinatesCorrectionServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CoordinatesCorrectionServiceServer will
 // result in compilation errors.
-type UnsafeGNSSCorrectionServiceServer interface {
-	mustEmbedUnimplementedGNSSCorrectionServiceServer()
+type UnsafeCoordinatesCorrectionServiceServer interface {
+	mustEmbedUnimplementedCoordinatesCorrectionServiceServer()
 }
 
-func RegisterGNSSCorrectionServiceServer(s grpc.ServiceRegistrar, srv GNSSCorrectionServiceServer) {
-	// If the following call pancis, it indicates UnimplementedGNSSCorrectionServiceServer was
+func RegisterCoordinatesCorrectionServiceServer(s grpc.ServiceRegistrar, srv CoordinatesCorrectionServiceServer) {
+	// If the following call pancis, it indicates UnimplementedCoordinatesCorrectionServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&GNSSCorrectionService_ServiceDesc, srv)
+	s.RegisterService(&CoordinatesCorrectionService_ServiceDesc, srv)
 }
 
-func _GNSSCorrectionService_StreamCorrections_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(GNSSCorrectionServiceServer).StreamCorrections(&grpc.GenericServerStream[dto.RoverRequest, dto.CorrectionResponse]{ServerStream: stream})
+func _CoordinatesCorrectionService_StreamCorrections_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(CoordinatesCorrectionServiceServer).StreamCorrections(&grpc.GenericServerStream[dto.RoverRequest, dto.CorrectionResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type GNSSCorrectionService_StreamCorrectionsServer = grpc.BidiStreamingServer[dto.RoverRequest, dto.CorrectionResponse]
+type CoordinatesCorrectionService_StreamCorrectionsServer = grpc.BidiStreamingServer[dto.RoverRequest, dto.CorrectionResponse]
 
-// GNSSCorrectionService_ServiceDesc is the grpc.ServiceDesc for GNSSCorrectionService service.
+// CoordinatesCorrectionService_ServiceDesc is the grpc.ServiceDesc for CoordinatesCorrectionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var GNSSCorrectionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "coord_correction_v1.GNSSCorrectionService",
-	HandlerType: (*GNSSCorrectionServiceServer)(nil),
+var CoordinatesCorrectionService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "coord_correction_v1.CoordinatesCorrectionService",
+	HandlerType: (*CoordinatesCorrectionServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "StreamCorrections",
-			Handler:       _GNSSCorrectionService_StreamCorrections_Handler,
+			Handler:       _CoordinatesCorrectionService_StreamCorrections_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},

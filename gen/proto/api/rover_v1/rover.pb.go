@@ -25,8 +25,8 @@ var File_proto_api_rover_v1_rover_proto protoreflect.FileDescriptor
 
 const file_proto_api_rover_v1_rover_proto_rawDesc = "" +
 	"\n" +
-	"\x1eproto/api/rover_v1/rover.proto\x12\brover_v1\x1a\x15proto/dto/rover.proto2\x9e\x01\n" +
-	"\x15GNSSCorrectionService\x12F\n" +
+	"\x1eproto/api/rover_v1/rover.proto\x12\brover_v1\x1a\x15proto/dto/rover.proto2\x95\x01\n" +
+	"\fRoverService\x12F\n" +
 	"\rRegisterRover\x12\x19.dto.RegisterRoverRequest\x1a\x1a.dto.RegisterRoverResponse\x12=\n" +
 	"\x0fDeregisterRover\x12\f.dto.RoverID\x1a\x1c.dto.DeregisterRoverResponseBJZHgithub.com/ShevelevEvgeniy/geodesy_proto/gen/proto/api/rover_v1;rover_v1b\x06proto3"
 
@@ -37,10 +37,10 @@ var file_proto_api_rover_v1_rover_proto_goTypes = []any{
 	(*dto.DeregisterRoverResponse)(nil), // 3: dto.DeregisterRoverResponse
 }
 var file_proto_api_rover_v1_rover_proto_depIdxs = []int32{
-	0, // 0: rover_v1.GNSSCorrectionService.RegisterRover:input_type -> dto.RegisterRoverRequest
-	1, // 1: rover_v1.GNSSCorrectionService.DeregisterRover:input_type -> dto.RoverID
-	2, // 2: rover_v1.GNSSCorrectionService.RegisterRover:output_type -> dto.RegisterRoverResponse
-	3, // 3: rover_v1.GNSSCorrectionService.DeregisterRover:output_type -> dto.DeregisterRoverResponse
+	0, // 0: rover_v1.RoverService.RegisterRover:input_type -> dto.RegisterRoverRequest
+	1, // 1: rover_v1.RoverService.DeregisterRover:input_type -> dto.RoverID
+	2, // 2: rover_v1.RoverService.RegisterRover:output_type -> dto.RegisterRoverResponse
+	3, // 3: rover_v1.RoverService.DeregisterRover:output_type -> dto.DeregisterRoverResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
