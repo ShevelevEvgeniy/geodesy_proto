@@ -7,6 +7,7 @@
 package dto
 
 import (
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -24,7 +25,6 @@ const (
 
 type RegisterRoverRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	IsActive      bool                   `protobuf:"varint,3,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
 	MaxDistanceKm float64                `protobuf:"fixed64,4,opt,name=max_distance_km,json=maxDistanceKm,proto3" json:"max_distance_km,omitempty"`
@@ -60,13 +60,6 @@ func (x *RegisterRoverRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use RegisterRoverRequest.ProtoReflect.Descriptor instead.
 func (*RegisterRoverRequest) Descriptor() ([]byte, []int) {
 	return file_proto_dto_rover_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *RegisterRoverRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
 }
 
 func (x *RegisterRoverRequest) GetName() string {
@@ -378,29 +371,28 @@ var File_proto_dto_rover_proto protoreflect.FileDescriptor
 
 const file_proto_dto_rover_proto_rawDesc = "" +
 	"\n" +
-	"\x15proto/dto/rover.proto\x12\x03dto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x7f\n" +
-	"\x14RegisterRoverRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
-	"\tis_active\x18\x03 \x01(\bR\bisActive\x12&\n" +
-	"\x0fmax_distance_km\x18\x04 \x01(\x01R\rmaxDistanceKm\"K\n" +
+	"\x15proto/dto/rover.proto\x12\x03dto\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x88\x01\n" +
+	"\x14RegisterRoverRequest\x12\x1b\n" +
+	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x03R\x04name\x12\x1b\n" +
+	"\tis_active\x18\x03 \x01(\bR\bisActive\x126\n" +
+	"\x0fmax_distance_km\x18\x04 \x01(\x01B\x0e\xfaB\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\rmaxDistanceKm\"T\n" +
 	"\x15RegisterRoverResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\x19\n" +
-	"\aRoverID\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"M\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12!\n" +
+	"\amessage\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\amessage\"#\n" +
+	"\aRoverID\x12\x18\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\x02id\"V\n" +
 	"\x17DeregisterRoverResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xd6\x01\n" +
-	"\fRoverRequest\x12\x19\n" +
-	"\brover_id\x18\x01 \x01(\tR\aroverId\x12\x1a\n" +
-	"\blatitude\x18\x02 \x01(\x01R\blatitude\x12\x1c\n" +
-	"\tlongitude\x18\x03 \x01(\x01R\tlongitude\x12\x1a\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12!\n" +
+	"\amessage\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\amessage\"\x9b\x02\n" +
+	"\fRoverRequest\x12#\n" +
+	"\brover_id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\aroverId\x123\n" +
+	"\blatitude\x18\x02 \x01(\x01B\x17\xfaB\x14\x12\x12\x19\x00\x00\x00\x00\x00\x80V@)\x00\x00\x00\x00\x00\x80V\xc0R\blatitude\x125\n" +
+	"\tlongitude\x18\x03 \x01(\x01B\x17\xfaB\x14\x12\x12\x19\x00\x00\x00\x00\x00\x80f@)\x00\x00\x00\x00\x00\x80f\xc0R\tlongitude\x12\x1a\n" +
 	"\baltitude\x18\x04 \x01(\x01R\baltitude\x128\n" +
-	"\ttimestamp\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12\x1b\n" +
-	"\tgnss_data\x18\x06 \x01(\fR\bgnssData\"|\n" +
-	"\x12CorrectionResponse\x12'\n" +
-	"\x0fcorrection_data\x18\x01 \x01(\fR\x0ecorrectionData\x12=\n" +
+	"\ttimestamp\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12$\n" +
+	"\tgnss_data\x18\x06 \x01(\fB\a\xfaB\x04z\x02\x10\x01R\bgnssData\"\x85\x01\n" +
+	"\x12CorrectionResponse\x120\n" +
+	"\x0fcorrection_data\x18\x01 \x01(\fB\a\xfaB\x04z\x02\x10\x01R\x0ecorrectionData\x12=\n" +
 	"\fgenerated_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\vgeneratedAtB<Z:github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/dto;dtob\x06proto3"
 
 var (
