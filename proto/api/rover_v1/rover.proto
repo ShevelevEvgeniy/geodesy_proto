@@ -6,7 +6,7 @@ option go_package = "github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/api/rove
 
 import "proto/dto/rover.proto";
 
-service GNSSCorrectionService {
+service RoverService {
   rpc RegisterRover(dto.RegisterRoverRequest) returns (dto.RegisterRoverResponse);
   rpc DeregisterRover(dto.RoverID) returns (dto.DeregisterRoverResponse);
 }

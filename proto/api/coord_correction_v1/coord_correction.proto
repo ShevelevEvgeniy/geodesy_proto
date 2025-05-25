@@ -6,7 +6,7 @@ option go_package = "github.com/ShevelevEvgeniy/geodesy_proto/gen/proto/api/coor
 
 import "proto/dto/rover.proto";
 
-service GNSSCorrectionService {
+service CoordinatesCorrectionService {
   rpc StreamCorrections(stream dto.RoverRequest) returns (stream dto.CorrectionResponse);
 }
 

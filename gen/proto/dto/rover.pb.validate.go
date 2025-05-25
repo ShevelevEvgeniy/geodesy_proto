@@ -60,6 +60,18 @@ func (m *RegisterRoverRequest) validate(all bool) error {
 
 	var errors []error
 
+	if err := m._validateUuid(m.GetOwnerId()); err != nil {
+		err = RegisterRoverRequestValidationError{
+			field:  "OwnerId",
+			reason: "value must be a valid UUID",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if utf8.RuneCountInString(m.GetName()) < 3 {
 		err := RegisterRoverRequestValidationError{
 			field:  "Name",
@@ -71,7 +83,69 @@ func (m *RegisterRoverRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if _, ok := RoverType_name[int32(m.GetRoverType())]; !ok {
+		err := RegisterRoverRequestValidationError{
+			field:  "RoverType",
+			reason: "value must be one of the defined enum values",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetSubscriptionExpiresAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RegisterRoverRequestValidationError{
+					field:  "SubscriptionExpiresAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RegisterRoverRequestValidationError{
+					field:  "SubscriptionExpiresAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSubscriptionExpiresAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RegisterRoverRequestValidationError{
+				field:  "SubscriptionExpiresAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if utf8.RuneCountInString(m.GetSerialNumber()) < 3 {
+		err := RegisterRoverRequestValidationError{
+			field:  "SerialNumber",
+			reason: "value length must be at least 3 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	// no validation rules for IsActive
+
+	if len(m.GetConstellations()) < 1 {
+		err := RegisterRoverRequestValidationError{
+			field:  "Constellations",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if m.GetMaxDistanceKm() <= 0 {
 		err := RegisterRoverRequestValidationError{
@@ -86,6 +160,14 @@ func (m *RegisterRoverRequest) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return RegisterRoverRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *RegisterRoverRequest) _validateUuid(uuid string) error {
+	if matched := _rover_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
@@ -188,10 +270,11 @@ func (m *RegisterRoverResponse) validate(all bool) error {
 
 	// no validation rules for Success
 
-	if utf8.RuneCountInString(m.GetMessage()) < 1 {
-		err := RegisterRoverResponseValidationError{
-			field:  "Message",
-			reason: "value length must be at least 1 runes",
+	if err := m._validateUuid(m.GetRoverId()); err != nil {
+		err = RegisterRoverResponseValidationError{
+			field:  "RoverId",
+			reason: "value must be a valid UUID",
+			cause:  err,
 		}
 		if !all {
 			return err
@@ -199,8 +282,57 @@ func (m *RegisterRoverResponse) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if err := m._validateUuid(m.GetOwnerId()); err != nil {
+		err = RegisterRoverResponseValidationError{
+			field:  "OwnerId",
+			reason: "value must be a valid UUID",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetRegisteredAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RegisterRoverResponseValidationError{
+					field:  "RegisteredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RegisterRoverResponseValidationError{
+					field:  "RegisteredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRegisteredAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RegisterRoverResponseValidationError{
+				field:  "RegisteredAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return RegisterRoverResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *RegisterRoverResponse) _validateUuid(uuid string) error {
+	if matched := _rover_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
@@ -421,6 +553,30 @@ func (m *DeregisterRoverResponse) validate(all bool) error {
 
 	// no validation rules for Success
 
+	if err := m._validateUuid(m.GetRoverId()); err != nil {
+		err = DeregisterRoverResponseValidationError{
+			field:  "RoverId",
+			reason: "value must be a valid UUID",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if err := m._validateUuid(m.GetOwnerId()); err != nil {
+		err = DeregisterRoverResponseValidationError{
+			field:  "OwnerId",
+			reason: "value must be a valid UUID",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if utf8.RuneCountInString(m.GetMessage()) < 1 {
 		err := DeregisterRoverResponseValidationError{
 			field:  "Message",
@@ -434,6 +590,14 @@ func (m *DeregisterRoverResponse) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return DeregisterRoverResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *DeregisterRoverResponse) _validateUuid(uuid string) error {
+	if matched := _rover_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
@@ -610,6 +774,19 @@ func (m *RoverRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if _, ok := CoordinateSystem_name[int32(m.GetCoordinateSystem())]; !ok {
+		err := RoverRequestValidationError{
+			field:  "CoordinateSystem",
+			reason: "value must be one of the defined enum values",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for CoordinateSubsystem
+
 	if len(errors) > 0 {
 		return RoverRequestMultiError(errors)
 	}
@@ -717,6 +894,18 @@ func (m *CorrectionResponse) validate(all bool) error {
 
 	var errors []error
 
+	if err := m._validateUuid(m.GetBaseStationId()); err != nil {
+		err = CorrectionResponseValidationError{
+			field:  "BaseStationId",
+			reason: "value must be a valid UUID",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(m.GetCorrectionData()) < 1 {
 		err := CorrectionResponseValidationError{
 			field:  "CorrectionData",
@@ -759,6 +948,14 @@ func (m *CorrectionResponse) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return CorrectionResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *CorrectionResponse) _validateUuid(uuid string) error {
+	if matched := _rover_uuidPattern.MatchString(uuid); !matched {
+		return errors.New("invalid uuid format")
 	}
 
 	return nil
